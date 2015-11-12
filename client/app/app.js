@@ -1,7 +1,8 @@
 angular.module('app', [
   'app.facebook',
   'app.home',
-  'app.map'
+  'app.map',
+  'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
 
