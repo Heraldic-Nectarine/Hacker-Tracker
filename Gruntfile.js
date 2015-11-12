@@ -3,6 +3,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ' '
+      },
+      dist: {
+        
+        src: ['client/*.js'],
+        // the location of the resulting JS file
+        dest: 'dist/trackerConcat.js'
+      }
     },
 
     mochaTest: {
@@ -21,31 +30,44 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        // the banner is inserted at the top of the output
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'dist/tracker.min.js': ['dist/trackerConcat.js']
+        }
+      }
     },
 
     jshint: {
       files: [
         // Add filespec list here
+        'server/*.js', 'client/*.js'
       ],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
-        ignores: [
-          'public/lib/**/*.js',
-          'public/dist/**/*.js'
-        ]
+        
       }
     },
 
     cssmin: {
         // Add filespec list here
+        target: {
+          files: {
+            'dist/minifiedcss.css': ['style.css']
+          }
+        }
+        
     },
 
     watch: {
       scripts: {
         files: [
-          'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'client/*.js',
+          'server/*.js',
         ],
         tasks: [
           'concat',
@@ -94,19 +116,20 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build', [ 'jshint', 'concat', 'uglify' , 'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
+      
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-      // add your production server task here
+      
+      'test', 'build', 'upload'
   ]);
 
 
