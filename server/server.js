@@ -5,9 +5,7 @@ var app = express();
 
 var port = process.env.PORT || 8000;
 
-mongoose.connect('mongodb://localhost/voter');
-
-require('./middleware.js')(app, express);
+require('./config/middleware.js')(app, express);
 
 app.listen(port);
 
