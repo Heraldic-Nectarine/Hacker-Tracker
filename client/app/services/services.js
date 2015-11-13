@@ -1,10 +1,10 @@
 angular.module('app.services', [])
 
 .factory('ServerInteraction', function ($http){
-  var storage;
+  var storage = [];
 
   var getFBdata = function(val){
-    storage = val;
+    storage.push(val);
   };
 
   return {
