@@ -1,12 +1,13 @@
 angular.module('app.map', [])
 
-.controller('MapController', ['$scope', 'ServerInteraction', function ($scope) {
+.controller('MapController', ['$scope', 'ServerInteraction', function ($scope, ServerInteraction) {
   // methods to be used inside map.html
-  $scope.user.userName = window.storage[0].name;
-  $scope.user.userPic = window.storage[0].picture;
+  $scope.user = {};
+  $scope.user.userName = ServerInteraction.storage[0].name;
+  $scope.user.userPic = ServerInteraction.storage[0].picture;
   $scope.user.latitude = '';
   $scope.user.longitude = '';
-  
+
   $scope.locationCheck = function () {
     if (navigator.geolocation) {
       console.log('Geolocation is supported!');
@@ -17,9 +18,9 @@ angular.module('app.map', [])
     var geoSuccess = function (position) {
       startPos = position;
       
-      $scope.latitude = startPos.coords.latitude;
-      $scope.longitude = startPos.coords.longitude;
-
+      $scope.user.latitude = startPos.coords.latitude;
+      $scope.user.longitude = startPos.coords.longitude;
+      console.log($scope.user);
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
