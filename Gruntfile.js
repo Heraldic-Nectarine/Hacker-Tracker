@@ -4,13 +4,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
-        separator: ' '
+        separator: ';'
       },
       dist: {
-        
+
         src: ['client/*.js'],
         // the location of the resulting JS file
-        dest: 'dist/trackerConcat.js'
+        dest: 'client/dist/trackerConcat.js'
       }
     },
 
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
-        script: 'server.js'
+        script: 'server/server.js'
       }
     },
 
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/tracker.min.js': ['dist/trackerConcat.js']
+          'client/dist/tracker.min.js': ['client/dist/trackerConcat.js']
         }
       }
     },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
-        
+
       }
     },
 
@@ -57,10 +57,10 @@ module.exports = function(grunt) {
         // Add filespec list here
         target: {
           files: {
-            'dist/minifiedcss.css': ['style.css']
+            'client/dist/minifiedcss.css': ['style.css']
           }
         }
-        
+
     },
 
     watch: {
@@ -82,6 +82,13 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+
+        command: 'git push heroku master',
+        options: {
+          stdout: true,
+          stderr: true,
+          failOnError: true
+        }
       }
     },
   });
@@ -121,14 +128,14 @@ module.exports = function(grunt) {
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      
+
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-      
+
       'test', 'build', 'upload'
   ]);
 
