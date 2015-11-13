@@ -38,6 +38,9 @@ angular.module('app.map', [])
     })
   }
 
+  socket.on('serverData', function (data) {
+    
+  })
 
 // setInterval($scope.locationCheck, 2000);
 

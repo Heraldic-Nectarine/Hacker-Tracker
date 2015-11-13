@@ -15,7 +15,7 @@ var storage = {};
 io.on('connection', function (socket) {
   socket.on('userData', function (data) {
     storage[data.id] = data;
-    console.log(storage);
+    socket.emit('serverData', storage);
   });
 });
 
