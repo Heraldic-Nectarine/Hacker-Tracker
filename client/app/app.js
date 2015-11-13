@@ -2,6 +2,7 @@ angular.module('app', [
   'app.facebook',
   'app.home',
   'app.map',
+  'app.services',
   'ngRoute',
   'ngMap'
 ])
