@@ -47,9 +47,7 @@ module.exports = function(grunt) {
         'server/*.js', 'client/*.js'
       ],
       options: {
-        force: 'true',
-        jshintrc: '.jshintrc',
-
+        force: 'true'
       }
     },
 
@@ -119,25 +117,25 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  // grunt.registerTask('test', [
-  //   'mochaTest'
-  // ]);
+  grunt.registerTask('test', [
+    'mochaTest'
+  ]);
 
-  // grunt.registerTask('build', [ 'jshint', 'concat', 'uglify' , 'cssmin'
-  // ]);
+  grunt.registerTask('build', [ 'jshint', 'concat', 'uglify' , 'cssmin'
+  ]);
 
-  // grunt.registerTask('upload', function(n) {
-  //   if(grunt.option('prod')) {
-      
-  //   } else {
-  //     grunt.task.run([ 'server-dev' ]);
-  //   }
-  // });
+  grunt.registerTask('upload', function(n) {
+    if(grunt.option('prod')) {
 
-  // grunt.registerTask('deploy', [
-      
-  //     'test', 'build', 'upload'
-  // ]);
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
+
+  grunt.registerTask('deploy', [
+
+      'test', 'build', 'upload'
+  ]);
 
 
 };
