@@ -8,8 +8,6 @@ angular.module('app.services', [])
     console.log(storage[0]);
   };
 
-  
-
   return {
     storage : storage,
     getFBdata : getFBdata
