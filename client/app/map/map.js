@@ -43,6 +43,9 @@ angular.module('app.map', [])
     console.log('temporary data store', tempDataStore)
   })
 
-// setInterval($scope.locationCheck, 2000);
+  $scope.repeater = function(){
+    window.setInterval($scope.locationCheck, 5000);
+  }
+
 
 }]);
