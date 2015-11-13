@@ -9,6 +9,9 @@ angular.module('app', [
 .config(function ($routeProvider, $httpProvider) {
 
   $routeProvider
+    .when('/', {
+      redirectTo: '/home'
+    })
     .when('/home', {
       templateUrl: 'app/home/home.html',
       controller: 'HomeController'
