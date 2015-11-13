@@ -3,10 +3,6 @@
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    "postinstall": "grunt deploy",
-    "start": "grunt"
-  },
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^1.5.7",
