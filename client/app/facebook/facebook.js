@@ -1,6 +1,6 @@
 angular.module('app.facebook', ['ngOpenFB'])
 
-.controller('FacebookController', ['$scope', '$openFB', function ($scope, $openFB) {
+.controller('FacebookController', ['$scope', '$openFB', 'ServerInteraction', function ($scope, $openFB, ServerInteraction) {
 
   $scope.me = {};
   $openFB.init( {appId: '909462752470016'})
@@ -13,7 +13,7 @@ angular.module('app.facebook', ['ngOpenFB'])
   }, function( err ) {
       console.log(err);
   });
- //
+  
   $openFB.api({
     path: '/me/picture',
     params: {
@@ -23,7 +23,10 @@ angular.module('app.facebook', ['ngOpenFB'])
     }
   }).then(function( res ) {
     angular.extend($scope.me, {picture: res.data.url});
+    console.log($scope.me);
+    // ServerInteraction.sendFBinfo($scope.me);
   });
+
 
 }
 ]);
