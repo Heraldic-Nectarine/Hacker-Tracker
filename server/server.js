@@ -12,7 +12,7 @@ server.listen(port);
 
 io.on('connection', function (socket) {
 
-  socket.on('test', function (data) {
+  socket.on('userData', function (data) {
     console.log(data);
   });
 });
