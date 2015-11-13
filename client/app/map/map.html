@@ -15,8 +15,8 @@
   </button>
 
   <ng-map default-style="true" center="current-location" zoom="14">
-    <custom-marker position="current-location">
-      <img src='test.png' height="45px" width='45px'>
-    </custom-marker>
+    <marker position="{{user.latitude}}, {{user.longitude}}"
+      icon = {{user.userPic}}>
+    </marker>
   </ng-map>
 </div>
