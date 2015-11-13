@@ -1,6 +1,6 @@
 angular.module('app.map', [])
 
-.controller('MapController', ['$scope', function ($scope) {
+.controller('MapController', ['$scope', 'ServerInteraction', function ($scope) {
   // methods to be used inside map.html
   $scope.latitude = '';
   $scope.longitude = '';
@@ -20,6 +20,17 @@ angular.module('app.map', [])
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
+  $scope.setOthersLocations = function () {
+    ServerInteraction.getUserLocations().then(function(locations){
+      //something to drop markers based on locations and formatting
+      //if marker is currently present for specific user
+        //remove marker
+      //place new marker at new location
+      //possibly an ng-repeat event that places new markers for users;
+      //<marker position={{location.lat, location.long}}></marker>
+    })
+  }
+
 
 // setInterval($scope.locationCheck, 2000);
 

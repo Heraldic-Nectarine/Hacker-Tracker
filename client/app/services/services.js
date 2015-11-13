@@ -1,6 +1,6 @@
 angular.module('app.services', [])
 
-.factory('ServerInteraction', function($http){
+.factory('ServerInteraction', function ($http){
   var sendLocation = function(val){
     return $http({
       method: 'POST',
@@ -8,6 +8,15 @@ angular.module('app.services', [])
       data: val
     });
   };
+  var getUserLocations = function ($http) {
+    return $http({
+      method: 'GET',
+      url: '/api/user'
+    }).then(function (data) {
+      console.log(data);
+      return data;
+    })
+  }
   var sendFBinfo = function(val){
     return $http({
       method: 'POST',
