@@ -23,7 +23,7 @@ angular.module('app.facebook', ['ngOpenFB'])
     }
   }).then(function( res ) {
     angular.extend($scope.me, {picture: res.data.url});
-    socket.emit('test', $scope.me);
+    ServerInteraction.getFBdata($scope.me);
     // ServerInteraction.sendFBinfo($scope.me);
   });
 

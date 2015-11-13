@@ -11,10 +11,7 @@ require('./config/middleware.js')(app, express);
 server.listen(port);
 
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+
   socket.on('test', function (data) {
     console.log(data);
   });
