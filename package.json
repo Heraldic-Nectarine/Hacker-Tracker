@@ -4,7 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "postinstall": "grunt deploy",
     "start": "nodemon server/server.js"
   },
   "license": "ISC",
