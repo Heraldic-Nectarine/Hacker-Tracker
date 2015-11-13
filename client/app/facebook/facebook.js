@@ -31,12 +31,6 @@ angular.module('app.facebook', ['ngOpenFB'])
   }).then(function( res ) {
     angular.extend($scope.me, {picture: res.data.url});
     ServerInteraction.getFBdata($scope.me);
-    for (var x in $scope.me) {
-      console.log($scope.me[x]);
-    }
-    console.log('paging next', $scope.me.paging);
-    console.log('paging next', $scope.me.id);
-    // ServerInteraction.sendFBinfo($scope.me);
   });
 
 
