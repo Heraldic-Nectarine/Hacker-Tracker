@@ -2,8 +2,11 @@ angular.module('app.map', [])
 
 .controller('MapController', ['$scope', 'ServerInteraction', function ($scope) {
   // methods to be used inside map.html
-  $scope.latitude = '';
-  $scope.longitude = '';
+  $scope.user.userName = window.storage[0].name;
+  $scope.user.userPic = window.storage[0].picture;
+  $scope.user.latitude = '';
+  $scope.user.longitude = '';
+  
   $scope.locationCheck = function () {
     if (navigator.geolocation) {
       console.log('Geolocation is supported!');
