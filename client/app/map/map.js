@@ -21,8 +21,7 @@ angular.module('app.map', [])
       
       $scope.user.latitude = startPos.coords.latitude;
       $scope.user.longitude = startPos.coords.longitude;
-      console.log($scope.user);
-
+      
       socket.emit('userData', $scope.user);
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
@@ -38,6 +37,11 @@ angular.module('app.map', [])
     })
   }
 
+  var tempDataStore;
+  socket.on('serverData', function (data) {
+    tempDataStore = data;
+    console.log('temporary data store', tempDataStore)
+  })
 
 // setInterval($scope.locationCheck, 2000);
 
