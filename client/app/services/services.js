@@ -5,8 +5,10 @@ angular.module('app.services', [])
 
   var getFBdata = function(val){
     storage.push(val);
-    console.log(storage);
-  }
+    console.log(storage[0]);
+  };
+
+  
 
   return {
     storage : storage,
