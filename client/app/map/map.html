@@ -1,7 +1,10 @@
-
+<div ng-controller="MapController">
+  <button ng-click="locationCheck()"> Check Location
+  </button>
+</div>
 
 <ng-map default-style="true" center="current-location" zoom="14">
-    <custom-marker position="current-location">
-      <img src='test.png' height="45px" width='45px'>
-    </custom-marker>
-  </ng-map>
+  <custom-marker position="current-location">
+    <img src='test.png' height="45px" width='45px'>
+  </custom-marker>
+</ng-map>
