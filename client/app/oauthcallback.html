@@ -7,7 +7,7 @@
           body        = opener.document.querySelectorAll('body');
           $body       = opener.angular.element(body);
           rootScope   = $body.scope();
-      
+
           rootScope.$broadcast('ngOpenFB:loadend', window.location.href);
           window.close();
       }
