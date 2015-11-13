@@ -10,10 +10,12 @@ require('./config/middleware.js')(app, express);
 
 server.listen(port);
 
-io.on('connection', function (socket) {
+var storage = {};
 
+io.on('connection', function (socket) {
   socket.on('userData', function (data) {
-    console.log(data);
+    storage[data.id] = data;
+    console.log(storage);
   });
 });
 
