@@ -9,6 +9,8 @@ angular.module('app.map', [])
   $scope.user.latitude = '';
   $scope.user.longitude = '';
 
+  $scope.tempDataStore;
+
   $scope.locationCheck = function () {
     if (navigator.geolocation) {
       console.log('Geolocation is supported!');
@@ -37,10 +39,9 @@ angular.module('app.map', [])
     })
   }
 
-  var tempDataStore;
   socket.on('serverData', function (data) {
-    tempDataStore = data;
-    console.log('temporary data store', tempDataStore)
+    $scope.tempDataStore = data;
+    console.log('temporary data store', $scope.tempDataStore)
   })
 
   
