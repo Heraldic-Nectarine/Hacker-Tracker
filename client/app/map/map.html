@@ -12,8 +12,14 @@
   </button>
 
   <ng-map default-style="true" center="current-location" zoom="14">
-    <marker position="{{user.latitude}}, {{user.longitude}}"
-      icon = {{user.userPic}}>
+    <marker position="{{user.latitude}}, {{user.longitude}}" icon = {{user.userPic}}>
     </marker>
+    <marker ng-repeat="client in tempDataStore" position="{{client.latitude}},{{client.longitude}}" icon = {{client.userPic}}></marker>
   </ng-map>
+
+
+<div ng-repeat="client in tempDataStore"> 
+  <img src={{client.userPic}}></img>
+</div>
+
 </div>

@@ -6,8 +6,8 @@ angular.module('app.facebook', ['ngOpenFB'])
   $openFB.init( {appId: '909462752470016'})
 
   $openFB.login({scope: 'email, user_friends'})
-  .then(function (res) {
 
+  .then(function (res) {
     $openFB.api({path: '/me'})
     .then(function (res) {
       angular.extend($scope.me, res);
