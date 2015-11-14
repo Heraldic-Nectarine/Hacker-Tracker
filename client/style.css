@@ -8,3 +8,7 @@ h1 {
   padding: 20px;
   line-height: 26.3999996185303px;
 }
+
+.picture {
+  border-radius: 50%;
+}
