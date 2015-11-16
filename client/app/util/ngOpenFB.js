@@ -231,6 +231,33 @@
           return q.promise;
         },
 
+            /**
+         * Logout from Facebook, and remove the token.
+         * IMPORTANT: For the Facebook logout to work, the logoutRedirectURL must be on the domain specified in "Site URL" in your Facebook App Settings
+         *
+         */
+        logout: function (callback) {
+            var logoutWindow,
+                token = tokenStore.fbAccessToken;
+
+            /* Remove token. Will fail silently if does not exist */
+            tokenStore.removeItem('fbtoken');
+
+            if (token) {
+                logoutWindow = window.open(logoutURL + '?access_token=' + token + '&next=' + logoutRedirectURL, '_blank', 'location=no,clearcache=yes');
+                if (runningInCordova) {
+                    setTimeout(function() {
+                        logoutWindow.close();
+                    }, 700);
+                }
+            }
+
+            if (callback) {
+                callback();
+            }
+
+        },
+
         /*
          * Helper function called after successful login including the url of the callback.
         #
