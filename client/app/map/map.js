@@ -46,6 +46,6 @@ angular.module('app.map', [])
   //   })
   // }
 
-  $interval($scope.locationCheck, 5000);
+  $interval($scope.locationCheck, 3000);
   
 }]);
