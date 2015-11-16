@@ -1,14 +1,15 @@
 angular.module('app.services', [])
 
-.factory('ServerInteraction', function ($http){
+.factory('ClientHelper', function ($http){
   var storage = [];
 
-  var getFBdata = function(val){
+  var getFBdata = function (val) {
     storage.push(val);
   };
 
   return {
     storage : storage,
-    getFBdata : getFBdata
+    getFBdata : getFBdata,
   }
-})
+
+});
