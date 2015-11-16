@@ -13,3 +13,15 @@ h1 {
 .picture {
   border-radius: 50%;
 }
+
+.nav li {
+  display: inline;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.nav {
+  text-align: center;
+}
