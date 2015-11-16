@@ -1,0 +1,18 @@
+<div id='mapMaker'>
+  <div class='navbar col-md-4 col-sm-4 col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-6' >
+    <div class='nav'>
+      <li><a href='#/map' class='create'>Map</a></li>
+      <li><a ng-click="logout()" href='#/logout' class='logout'>Logout</a></li>
+    </div>
+  </div>
+
+  <form name='mapMaker' ng-submit="setup()">
+      <input name='ballot' type='string'
+        ng-model="mapName"
+        placeholder="Enter the name of the room" required />
+      <button type="submit" value="Creator">
+        GO
+      </button>
+  </form>
+
+</div>
