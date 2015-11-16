@@ -14,14 +14,30 @@ h1 {
   border-radius: 50%;
 }
 
+.navbar .nav li > a:hover {
+  background-color: #346392;
+  border-radius: 5px;
+}
+
+.navbar .nav li > a:active {
+  background-color: #27496d;
+  border-radius: 5px;
+}
+
 .nav li {
   display: inline;
-  
   margin: 10px;
-  border: 1px solid black;
   border-radius: 5px;
+  wide: 80%;
+  background-color: #6496c8;
 }
 
 .nav {
   text-align: center;
+}
+
+.nav li a {
+  font-size: 30px;
+  font-family: 'Lato', sans-serif;
+  color: white;
 }
