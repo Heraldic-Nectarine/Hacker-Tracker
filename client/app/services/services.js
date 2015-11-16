@@ -7,19 +7,9 @@ angular.module('app.services', [])
     storage.push(val);
   };
 
-  var sendLogout = function(val){
-    console.log('yes');
-    return $http({
-      method: 'POST',
-      url: '/api/users',
-      data: val
-    });
-  };
-
   return {
     storage : storage,
     getFBdata : getFBdata,
-    sendLogout : sendLogout
   }
 
 });

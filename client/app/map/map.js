@@ -35,7 +35,8 @@ angular.module('app.map', [])
   }
   
   $scope.logOut = function () {
-    ClientHelper.sendLogout($scope.user.id);
+    console.log('a',$scope.user.id)
+    socket.emit('logout', $scope.user.id);
   }
 
 
