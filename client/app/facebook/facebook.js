@@ -1,6 +1,6 @@
 angular.module('app.facebook', ['ngOpenFB'])
 
-.controller('FacebookController', ['$scope', '$openFB', 'ServerInteraction', '$location', function ($scope, $openFB, ServerInteraction, $location) {
+.controller('FacebookController', ['$scope', '$openFB', 'ClientHelper', '$location', function ($scope, $openFB, ClientHelper, $location) {
 
   $scope.me = {};
   $openFB.init( {appId: '909462752470016'})
@@ -31,7 +31,7 @@ angular.module('app.facebook', ['ngOpenFB'])
       }
     }).then(function( res ) {
       angular.extend($scope.me, {picture: res.data.url});
-      ServerInteraction.getFBdata($scope.me);
+      ClientHelper.getFBdata($scope.me);
     }).then(function() {
       $location.path('/facebook');
     });

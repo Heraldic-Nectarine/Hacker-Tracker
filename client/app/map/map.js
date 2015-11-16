@@ -1,11 +1,11 @@
 angular.module('app.map', [])
 
-.controller('MapController', ['$scope', '$interval', 'ServerInteraction', function ($scope, $interval, ServerInteraction) {
+.controller('MapController', ['$scope', '$interval', 'ClientHelper', function ($scope, $interval, ClientHelper) {
   // methods to be used inside map.html
   $scope.user = {};
-  $scope.user.id = ServerInteraction.storage[0].id;
-  $scope.user.userName = ServerInteraction.storage[0].name;
-  $scope.user.userPic = ServerInteraction.storage[0].picture;
+  $scope.user.id = ClientHelper.storage[0].id;
+  $scope.user.userName = ClientHelper.storage[0].name;
+  $scope.user.userPic = ClientHelper.storage[0].picture;
   $scope.user.latitude = '';
   $scope.user.longitude = '';
 
@@ -13,7 +13,6 @@ angular.module('app.map', [])
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
-    console.log('temporary data store', $scope.tempDataStore)
   })
 
   $scope.locationCheck = function () {
@@ -22,7 +21,6 @@ angular.module('app.map', [])
     } else {
       console.log('Geolocation is not supported for this Browser/OS version yet.');
     }
-    console.log($scope.tempDataStore);
 
     var startPos;
     var geoSuccess = function (position) {
@@ -36,7 +34,7 @@ angular.module('app.map', [])
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
   // $scope.setOthersLocations = function () {
-  //   ServerInteraction.getUserLocations().then(function(locations){
+  //   ClientHelper.getUserLocations().then(function(locations){
   //     //something to drop markers based on locations and formatting
   //     //if marker is currently present for specific user
   //       //remove marker
