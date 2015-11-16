@@ -33,16 +33,11 @@ angular.module('app.map', [])
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
-  // $scope.setOthersLocations = function () {
-  //   ClientHelper.getUserLocations().then(function(locations){
-  //     //something to drop markers based on locations and formatting
-  //     //if marker is currently present for specific user
-  //       //remove marker
-  //     //place new marker at new location
-  //     //possibly an ng-repeat event that places new markers for users;
-  //     //<marker position={{location.lat, location.long}}></marker>
-  //   })
-  // }
+  
+  $scope.logOut = function () {
+    ClientHelper.sendLogout($scope.user.id);
+  }
+
 
   $interval($scope.locationCheck, 3000);
   
