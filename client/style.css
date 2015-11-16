@@ -7,8 +7,21 @@ h1 {
   font-weight: 250;
   padding: 20px;
   line-height: 26.3999996185303px;
+  text-align: center;
 }
 
 .picture {
   border-radius: 50%;
+}
+
+.nav li {
+  display: inline;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.nav {
+  text-align: center;
 }
