@@ -1,6 +1,7 @@
 angular.module('app.services', [])
 
 .factory('ClientHelper', function ($http){
+  //set up storage for facebook info to be used on map
   var storage = [];
   var storage2 = [];
 
