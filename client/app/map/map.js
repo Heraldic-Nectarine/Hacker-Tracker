@@ -13,7 +13,6 @@ angular.module('app.map', [])
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
-    console.log('temporary data store', $scope.tempDataStore)
   })
 
   $scope.locationCheck = function () {
@@ -22,7 +21,6 @@ angular.module('app.map', [])
     } else {
       console.log('Geolocation is not supported for this Browser/OS version yet.');
     }
-    console.log($scope.tempDataStore);
 
     var startPos;
     var geoSuccess = function (position) {
