@@ -1,6 +1,6 @@
-angular.module('app.map', [])
+angular.module('app.map', ['ngOpenFB'])
 
-.controller('MapController', ['$scope', '$interval', 'ClientHelper', function ($scope, $interval, ClientHelper) {
+.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', function ($scope, $openFB, $interval, ClientHelper) {
   // methods to be used inside map.html
   $scope.user = {};
   $scope.user.id = ClientHelper.storage[0].id;
@@ -27,22 +27,23 @@ angular.module('app.map', [])
     var startPos;
     var geoSuccess = function (position) {
       startPos = position;
-      
+
       $scope.user.latitude = startPos.coords.latitude;
       $scope.user.longitude = startPos.coords.longitude;
-      
+
       socket.emit('userData', $scope.user);
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
-  
+
   $scope.logOut = function () {
     $interval.cancel($scope.intervalFunc);
     socket.emit('logout', $scope.user.id);
+    $openFB.logout();
   }
-  
+
   $scope.startInterval = function (){
     $scope.intervalFunc = $interval($scope.locationCheck, 3000);
   }
-  
+
 }]);

@@ -3,6 +3,11 @@ angular.module('app.facebook', ['ngOpenFB'])
 .controller('FacebookController', ['$scope', '$openFB', 'ClientHelper', '$location', function ($scope, $openFB, ClientHelper, $location) {
 
   $scope.me = {};
+
+  $scope.logout = function () {
+    $openFB.logout();
+  };
+
   $openFB.init( {appId: '909462752470016'})
 
   $openFB.login({scope: 'email, user_friends'})
