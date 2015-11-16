@@ -12,6 +12,12 @@
 
 .picture {
   border-radius: 50%;
+  width: 10em;
+}
+
+.map {
+  width: 1284px;
+  height: 300px;
 }
 
 .navbar .nav li > a:hover {

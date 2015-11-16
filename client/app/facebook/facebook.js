@@ -31,8 +31,8 @@ angular.module('app.facebook', ['ngOpenFB'])
       path: '/me/picture',
       params: {
           redirect: false,
-          height: 64,
-          width: 64
+          height: 50,
+          width: 50
       }
     }).then(function( res ) {
       angular.extend($scope.me, {picture: res.data.url});
