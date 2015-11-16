@@ -10,9 +10,11 @@ angular.module('app.map', [])
   $scope.user.longitude = '';
 
   $scope.tempDataStore;
+  $scope.intervalFunc;
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
+    console.log(data);
   })
 
   $scope.locationCheck = function () {
@@ -35,11 +37,12 @@ angular.module('app.map', [])
   }
   
   $scope.logOut = function () {
-    console.log('a',$scope.user.id)
+    $interval.cancel($scope.intervalFunc);
     socket.emit('logout', $scope.user.id);
   }
-
-
-  $interval($scope.locationCheck, 3000);
+  
+  $scope.startInterval = function (){
+    $scope.intervalFunc = $interval($scope.locationCheck, 3000);
+  }
   
 }]);
