@@ -15,11 +15,6 @@
   width: 10em;
 }
 
-.map {
-  width: 1284px;
-  height: 300px;
-}
-
 .navbar .nav li > a:hover {
   background-color: #346392;
   border-radius: 5px;
