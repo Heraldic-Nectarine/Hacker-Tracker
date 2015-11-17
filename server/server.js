@@ -22,6 +22,7 @@ io.on('connection', function (socket) {
     socket.on('logout', function (info) {
       delete storage[data][info];
       socket.leave('/'+data);
+      socket.emit('serverData', storage[data]);
     })
   });
 });
