@@ -9,6 +9,8 @@ angular.module('app.map', ['ngOpenFB'])
   $scope.user.latitude = '';
   $scope.user.longitude = '';
 
+  $scope.mapName = ClientHelper.storage2[0];
+
   $scope.tempDataStore;
   $scope.intervalFunc;
 
@@ -46,7 +48,6 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.startInterval = function (){
-
     socket.emit('init', ClientHelper.storage2[0]);
     $scope.intervalFunc = $interval($scope.locationCheck, 3000);
   }
