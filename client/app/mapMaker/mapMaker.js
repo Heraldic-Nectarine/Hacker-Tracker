@@ -1,6 +1,6 @@
-angular.module('app.maker', [])
+angular.module('app.maker', ['ngOpenFB'])
 
-.controller('MapMakerController', ['$scope', '$location', 'ClientHelper', function ($scope, $location, ClientHelper) {
+.controller('MapMakerController', ['$scope','$openFB','$location', 'ClientHelper', function ($scope, $openFB, $location, ClientHelper) {
   
   $scope.mapName = ""
 
@@ -8,6 +8,10 @@ angular.module('app.maker', [])
     console.log($scope.mapName);
     ClientHelper.getMap($scope.mapName);
     $location.path('/map');
+  }
+
+  $scope.logout = function () {
+    $openFB.logout();
   }
 
 }]);

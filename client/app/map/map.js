@@ -37,10 +37,12 @@ angular.module('app.map', ['ngOpenFB'])
   }
   $scope.locationCheck();
 
-  $scope.logOut = function () {
+  $scope.logOut = function (fb) {
     $interval.cancel($scope.intervalFunc);
     socket.emit('logout', $scope.user.id);
-    $openFB.logout();
+    if (fb) {
+      $openFB.logout();
+    }
   }
 
   $scope.startInterval = function (){
