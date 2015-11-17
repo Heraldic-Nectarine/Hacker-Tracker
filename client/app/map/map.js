@@ -16,7 +16,6 @@ angular.module('app.map', ['ngOpenFB'])
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
-    console.log(data);
   })
 
   $scope.locationCheck = function () {
