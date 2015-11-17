@@ -3,15 +3,16 @@
     <div class='nav'>
       <li><a ng-click="logout()" href='#/logout' class='logout'>Logout</a></li>
     </div>
-  </div>
-
-  <form name='mapMaker' ng-submit="setup()">
+    <form name='mapMaker' ng-submit="setup()" class='col-md-12'>
       <input name='mapName' type='string'
-        ng-model="mapName"
+        ng-model="mapName" class='col-md-10'
         placeholder="Enter the name of the room" required />
-      <button type="submit" value="Creator">
+      <button type="submit" value="Creator" class='col-md-2'>
         GO
       </button>
   </form>
+  </div>
+
+  
 
 </div>
