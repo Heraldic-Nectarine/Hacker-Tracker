@@ -35,6 +35,7 @@ angular.module('app.map', ['ngOpenFB'])
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
+  $scope.locationCheck();
 
   $scope.logOut = function () {
     $interval.cancel($scope.intervalFunc);
@@ -43,7 +44,8 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.startInterval = function (){
+
+    socket.emit('init', ClientHelper.storage2[0]);
     $scope.intervalFunc = $interval($scope.locationCheck, 3000);
   }
-
 }]);

@@ -2,6 +2,7 @@ angular.module('app', [
   'app.facebook',
   'app.home',
   'app.map',
+  'app.maker',
   'app.services',
   'ngRoute',
   'ngMap'
@@ -23,6 +24,10 @@ angular.module('app', [
     .when('/map', {
       templateUrl: 'app/map/map.html',
       controller: 'MapController'
+    })
+    .when('/mapMaker', {
+      templateUrl: 'app/mapMaker/mapMaker.html',
+      controller: 'MapMakerController'
     })
     .when('/logout', {
       redirectTo: '/home'
