@@ -7,30 +7,29 @@
   > Hack Tracker lets you locate your friends and families.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-
+  > San Francisco is imminent for a massive earthquake that is predicted to level the city. Nothing is more stressful than being worried about loves ones and their safety. With Hacker Tracker, users can set up rooms with maps that pinpoint the specific location of each user in the room. It provides users to be able to see other users and their locations in real-time.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Not knowing the whereabouts of your friends and families can be stressful.
 
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Hacker Tracker lets you see the location of other users.
 
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "Hacker Tracker locations lives one track at a time."
 
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Simply go to http://gentle-badlands-9917.herokuapp.com
 
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I made a map with my family and now I'm never worried about their whereabouts when something dangerous has happened."
 
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Come and try it out with your friends and families!
 
 
