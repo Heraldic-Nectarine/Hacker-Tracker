@@ -8,6 +8,7 @@
       </ul>
     </div>
   </div>
+  
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
     <ng-map class="map" default-style="true" center="current-location" zoom="14">
       <marker ng-repeat="client in tempDataStore" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>

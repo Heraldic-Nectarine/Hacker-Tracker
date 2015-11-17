@@ -44,6 +44,8 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.startInterval = function (){
+
+    socket.emit('init', ClientHelper.storage2[0]);
     $scope.intervalFunc = $interval($scope.locationCheck, 3000);
   }
 }]);

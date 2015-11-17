@@ -12,12 +12,16 @@ server.listen(port);
 var storage = {};
 
 io.on('connection', function (socket) {
-  socket.on('userData', function (data) {
-    storage[data.id] = data;
-    socket.emit('serverData', storage);
-  });
-  socket.on('logout', function (data) {
-    delete storage[data];
+  socket.on('init', function (data) {
+    socket.join('/'+data);
+    storage[data] = {};
+    socket.on('userData', function (info) {
+      storage[data][info.id] = info;
+      socket.emit('serverData', storage[data]);
+    });
+    socket.on('logout', function (info) {
+      delete storage[data][info.id];
+    })
   });
 });
 
