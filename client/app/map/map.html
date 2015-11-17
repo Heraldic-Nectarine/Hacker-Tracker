@@ -1,5 +1,5 @@
 
-<div ng-init='startInterval()'>
+<div ng-init='init()'>
   <div id='map'>
     <div class='navbar col-md-4 col-sm-4 col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-6'>
       <ul class='nav'>
@@ -8,8 +8,9 @@
       </ul>
     </div>
   </div>
-  
+
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
+  <h4>Map: {{mapName}}</h4>
     <ng-map class="map" default-style="true" center="current-location" zoom="14">
       <marker ng-repeat="client in tempDataStore" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>
     </ng-map>
