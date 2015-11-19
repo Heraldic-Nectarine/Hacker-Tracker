@@ -1,12 +1,10 @@
-# Project Name
-
-> Hacker Tracker
+# Converge
 
 ## Team
 
-  - __Product Owner__: David Son
-  - __Scrum Master__: Matt
-  - __Development Team Members__: William Lee
+  - __Product Owner__: Cheyenne Kellis
+  - __Scrum Master__: Ammar Mian
+  - __Development Team Members__: Rochelle Lee, Thomas Sorensen
 
 ## Table of Contents
 
