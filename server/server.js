@@ -3,14 +3,17 @@ var app = express();
 var port = process.env.PORT || 8000;
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var ExRouter = express.Router();
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var expressRouter = express.Router();
 var db = require('./db.js');
+var router = require('./router.js');
 
 require('./config/middleware.js')(app, express);
 
-
-
-
+//router setup
+app.use('/', expressRouter); 
+router(expressRouter);
 
 server.listen(port);
 
@@ -19,8 +22,12 @@ var storage = {};
 io.on('connection', function (socket) {
   socket.on('init', function (data) {
     socket.join('/'+data);
+    //set socket.room before adding data
+
+    //storage === room 
     storage[data] = {};
     socket.on('userData', function (info) {
+      //info === $scope.user from the front end
       storage[data][info.id] = info;
       socket.emit('serverData', storage[data]);
     });

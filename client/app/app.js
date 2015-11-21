@@ -26,9 +26,9 @@ angular.module('app', [
       templateUrl: 'app/map/map.html',
       controller: 'MapController'
     })
-    .when('/mapMaker', {
-      templateUrl: 'app/mapMaker/mapMaker.html',
-      controller: 'MapMakerController'
+    .when('/manageRoom', {
+      templateUrl: 'app/manageRoom/manageRoom.html',
+      controller: 'ManageRoomController'
     })
     .when('/streetView', {
       templateUrl: 'app/streetView/streetView.html',

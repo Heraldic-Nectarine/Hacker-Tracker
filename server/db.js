@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-
-mongoose.connect('mongodb://localhost/dbname', function(err) {
+mongoose.connect('mongodb://localhost/friendfinder', function(err) {
     if (err) throw err;
 });
