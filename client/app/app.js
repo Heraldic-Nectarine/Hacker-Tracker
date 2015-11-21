@@ -31,10 +31,10 @@ angular.module('app', [
       templateUrl: 'app/map/map.html',
       controller: 'MapController'
     })
-    .state('mapMaker', {
-      url: '/mapMaker',
-      templateUrl: 'app/mapMaker/mapMaker.html',
-      controller: 'MapMakerController'
+    .state('manageRoom', {
+      url: '/manageRoom',
+      templateUrl: 'app/manageRoom/manageRoom.html',
+      controller: 'ManageRoomController'
     })
     .state('streetView', {
       url: '/streetView',
