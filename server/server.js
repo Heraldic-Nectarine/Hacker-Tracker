@@ -10,11 +10,8 @@ var db = require('./db.js');
 var router = require('./router.js');
 
 require('./config/middleware.js')(app, express);
-
-//router setup
-app.use('/', expressRouter); 
-router(expressRouter);
-
+app.use(ExRouter);
+router(ExRouter);
 server.listen(port);
 
 var storage = {};
