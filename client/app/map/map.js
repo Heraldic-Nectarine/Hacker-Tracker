@@ -9,17 +9,18 @@ angular.module('app.map', ['ngOpenFB'])
 
   $scope.mapName = "";
 
-  $scope.tempDataStore;
   $scope.intervalFunc;
 
-  socket.on('serverData', function (data) {
-    $scope.tempDataStore = data;
-    console.log(data);
+  //need to listen to specific room
+  socket.on('serverData', function (usersInRoom) {
+    $scope.usersInRoom = usersInRoom;
+    console.log("the user", usersInRoom[0]);
   });
 
   var cb = function (pos) {
     angular.extend($scope.user, pos);
     console.log('>>>>>',pos);
+    //will emit to a room joined
     socket.emit('userData', $scope.user);
   }
   
@@ -36,11 +37,15 @@ angular.module('app.map', ['ngOpenFB'])
     ClientHelper.getRooms()
       .then(function (rooms){
         $scope.rooms = rooms;
-      })
-    $scope.mapName = ClientHelper.storage2[0];
-    socket.emit('init', ClientHelper.storage2[0]);
+      })  
+  }
+
+  $scope.setupConnection = function (){
+    console.log("setting up");
+    socket.emit('connectToRoom', $scope.selectedRoom);
     $scope.intervalFunc = $interval( function () {
       ClientHelper.locationCheck(cb);
     }, 3000);
   }
+
 }]);
