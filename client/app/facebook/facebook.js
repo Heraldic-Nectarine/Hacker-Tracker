@@ -38,12 +38,8 @@ angular.module('app.facebook', ['ngOpenFB'])
       angular.extend($scope.me, {picture: res.data.url});
       ClientHelper.getFBdata($scope.me);
     }).then(function() {
-      $location.path('/facebook');
+      $location.path('/manageRoom');
     });
   });
-
-
-
-
 }
 ]);

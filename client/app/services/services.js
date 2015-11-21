@@ -8,7 +8,9 @@ angular.module('app.services', [])
     storage.push(val);
   };
 
-  var getMap = function (val) {
+  var saveMap = function (val) {
+    //upate this to write to DB
+
     storage2[0] = val;
   }
 
@@ -47,7 +49,7 @@ angular.module('app.services', [])
     storage : storage,
     storage2 : storage2,
     getFBdata : getFBdata,
-    getMap : getMap,
+    saveMap :saveMap,
     locationCheck : locationCheck,
     getStreetView : getStreetView
   }
