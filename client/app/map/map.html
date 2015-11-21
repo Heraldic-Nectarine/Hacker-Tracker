@@ -14,6 +14,7 @@
           <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
         </select>
         </form> 
+
       </ul>
     </div>
   </div>
@@ -21,8 +22,11 @@
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
   <h4>Map: {{selectedRoom}}</h4>
     <ng-map class="map" default-style="true" center="current-location" zoom="14">
-      <marker ng-repeat="client in usersInRoom" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>
+      <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click='goToStreetView(client)'></marker>
     </ng-map>
+  </div>
+  <div class='container'>
+    <div ui-view></div>
   </div>
 
 </div>

@@ -4,6 +4,7 @@ angular.module('app.services', [])
   var storage = [];
   var storage2 = [];
 
+
   var getFBdata = function (val) {
     storage.push(val);
   };
@@ -37,16 +38,17 @@ angular.module('app.services', [])
   }
 
   var getStreetView = function (data) {
+    debugger;
     return $http({
       method: 'GET',
       url : 'https://maps.googleapis.com/maps/api/streetview',
       //url: 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=40.7256210,-73.988453&fov=90&heading=210&pitch=7&key=AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
       params: {
-        size : '600x400',
+        size : '1000x1000',
         location : data.latitude + ',' + data.longitude, //verify what this provides
-        fov : 90,
-        heading : 210,
-        pitch : 7,
+        fov : 120,
+        //heading : 210,
+        pitch : 0,
         key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk'
       }
     });
@@ -58,6 +60,7 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+  var currentStreetViewUser = '';
 
   return {
     storage : storage,
@@ -66,7 +69,8 @@ angular.module('app.services', [])
     saveMap :saveMap,
     locationCheck : locationCheck,
     getStreetView : getStreetView, 
-    getRooms: getRooms
+    getRooms: getRooms,
+    currentStreetViewUser : currentStreetViewUser
   }
 
 });

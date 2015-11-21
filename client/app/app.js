@@ -5,44 +5,45 @@ angular.module('app', [
   'app.maker',
   'app.streetview',
   'app.services',
-  'ngRoute',
+  'ui.router',
   'ngMap'
 ])
-.config(function ($routeProvider, $httpProvider) {
 
-  $routeProvider
-    .when('/', {
+.config( function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/home');
+
+  $stateProvider
+    .state('/', {
       redirectTo: '/home'
     })
-    .when('/home', {
+    .state('home', {
+      url: '/home',
       templateUrl: 'app/home/home.html',
       controller: 'HomeController'
     })
-    .when('/replays', {
-      templateUrl: 'app/replays/replays.html',
-      controller: 'ReplayController'
-    })
-    .when('/facebook', {
+    .state('facebook', {
+      url: '/facebook',
       templateUrl: 'app/facebook/facebook.html',
       controller: 'FacebookController'
     })
-    .when('/map', {
+    .state('map', {
+      url: '/map',
       templateUrl: 'app/map/map.html',
       controller: 'MapController'
     })
-    .when('/manageRoom', {
+    .state('manageRoom', {
+      url: '/manageRoom',
       templateUrl: 'app/manageRoom/manageRoom.html',
       controller: 'ManageRoomController'
     })
-    .when('/streetView', {
+    .state('streetView', {
+      url: '/streetView',
       templateUrl: 'app/streetView/streetView.html',
       controller: 'StreetViewController'
     })
-    .when('/logout', {
-      redirectTo: '/home'
-    })
-    .otherwise({
+    .state('logout', {
+      url: '/logout',
       redirectTo: '/home'
     });
-
+  
 });
