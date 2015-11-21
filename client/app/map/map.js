@@ -56,7 +56,10 @@ angular.module('app.map', ['ngOpenFB'])
   $scope.goToStreetView = function () {
     console.log("We are here, goToStreetView");
     //$interval.cancel($scope.intervalFunc);
-    $rootScope.currentStreetViewUser = $scope.user.id;
+    ClientHelper.currentStreetViewUser = $scope.user.id;
+    // $rootScope.$broadcast("GetStreetViewUser", $scope.user.id);
+
+
     $location.path('streetView');
   }
 }]);

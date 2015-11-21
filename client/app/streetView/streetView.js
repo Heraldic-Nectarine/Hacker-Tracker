@@ -5,58 +5,49 @@ angular.module('app.streetview', ['ngOpenFB'])
   //>>>>>>>>>>>>>>>>>>>>>>>
   $scope.streetViewURL = 'http:\/\/maps.googleapis.com/maps/api/streetview';
   $scope.streetViewParams = {
-    fov : 90,
+    fov : 120,
     heading : 235,
     pitch : 5, 
     key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
-    size : '400x500'
+    size : '1000x700'
   }
   //>>>>>>>>>>>>>>>>>>>>>>>
 
-
-  // $scope.user = {};
-  // $scope.user.id = ClientHelper.storage[0].id;
-  // $scope.user.userName = ClientHelper.storage[0].name;
-  // $scope.user.userPic = ClientHelper.storage[0].picture;
-
-  // $scope.mapName = "";
-
-  // $scope.tempDataStore;
-  // $scope.intervalFunc;
-
   $scope.user = {};
-  $scope.user.id = $rootScope.currentStreetViewUser;
-  // $scope.test = {};
-  // $scope.test.title = 'a';
-  // $scope.$watch('streetViewParams')
-  
+  $scope.user.id = ClientHelper.currentStreetViewUser;
 
   socket.on('serverData', function (data) {
-    $scope.tempDataStore = data;
-    console.log(data);
-    console.log('Received');
-  });
+    for ( var key in data ) {
+      if ( data[key]['id'] === ClientHelper.currentStreetViewUser ) {
+        $scope.streetViewParams.location = data[key]['latitude'] + ',' + data[key]['longitude'];
+      }
+    }
 
-  var cb = function (pos) {
-    angular.extend($scope.user, pos);
-    $scope.streetViewParams.location = pos.latitude + ',' + pos.longitude;
-    // console.log('>>>>>',pos);
-    socket.emit('userData', $scope.user);
-    // $scope.test.title = 'Through my Eyes';
-
-    //NEED TO SET THE STREET VIEW URL
-    //debugger;
     $scope.$apply(function() {
       $scope.streetViewImg = _.reduce($scope.streetViewParams, function (memo, val, i) {
         return memo + i + '=' + val.toString() + '&';
       }, $scope.streetViewURL + '?');//need to remove this ampersand at the end
     });
+
     console.log($scope.streetViewImg);
+    
+  });
+
+
+// >>>>>GET MY LOCATION
+
+  var cb = function (pos) {
+    angular.extend($scope.user, pos);
+    // console.log('>>>>>',pos);
+    socket.emit('userData', $scope.user);
+
 
   }
   $interval( function ()  {
     ClientHelper.locationCheck(cb);
-  }, 3000);
+  }, 10000);
+
+// <<<<<<END GET MY LOCATION
 
 
   

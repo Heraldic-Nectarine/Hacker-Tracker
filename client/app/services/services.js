@@ -4,6 +4,7 @@ angular.module('app.services', [])
   var storage = [];
   var storage2 = [];
 
+
   var getFBdata = function (val) {
     storage.push(val);
   };
@@ -59,6 +60,7 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+  var currentStreetViewUser = '';
 
   return {
     storage : storage,
@@ -67,7 +69,8 @@ angular.module('app.services', [])
     saveMap :saveMap,
     locationCheck : locationCheck,
     getStreetView : getStreetView, 
-    getRooms: getRooms
+    getRooms: getRooms,
+    currentStreetViewUser : currentStreetViewUser
   }
 
 });
