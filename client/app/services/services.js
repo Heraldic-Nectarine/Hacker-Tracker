@@ -37,6 +37,7 @@ angular.module('app.services', [])
   }
 
   var getStreetView = function (data) {
+    debugger;
     return $http({
       method: 'GET',
       url : 'https://maps.googleapis.com/maps/api/streetview',
