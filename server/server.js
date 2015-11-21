@@ -11,17 +11,17 @@ var router = require('./router.js');
 
 require('./config/middleware.js')(app, express);
 router(expressRouter);
-app.use(expressRouter);
+app.use('/',expressRouter);
 server.listen(port);
 
 var currentUsersInRoom = [];
 var currentRoom = "";
 
 io.on('connection', function (socket) {
+
   socket.on('connectToRoom', function (room) {
     console.log("room on server", room);
     socket.join(room);
-
     socket.on('userData', function (user) {
       currentUsersInRoom.push(user);
       console.log(currentUsersInRoom);

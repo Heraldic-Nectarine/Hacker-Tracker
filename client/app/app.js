@@ -18,6 +18,10 @@ angular.module('app', [
       templateUrl: 'app/home/home.html',
       controller: 'HomeController'
     })
+    .when('/replays', {
+      templateUrl: 'app/replays/replays.html',
+      controller: 'ReplayController'
+    })
     .when('/facebook', {
       templateUrl: 'app/facebook/facebook.html',
       controller: 'FacebookController'
