@@ -8,16 +8,20 @@
         <li><a href='#/streetView'>Street View</a></li>
 
         <!-- show list of rooms - call db to get  -->
-        {{rooms}}
-        
+        <form name="roomForm"> 
+        <select name="roomSelect" id="roomSelect" ng-model="selectedRoom" ng-change="setupConnection()">
+          <option>--Select a Room--</option>
+          <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
+        </select>
+        </form> 
       </ul>
     </div>
   </div>
 
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
-  <h4>Map: {{mapName}}</h4>
+  <h4>Map: {{selectedRoom}}</h4>
     <ng-map class="map" default-style="true" center="current-location" zoom="14">
-      <marker ng-repeat="client in tempDataStore" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>
+      <marker ng-repeat="client in usersInRoom" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>
     </ng-map>
   </div>
 
