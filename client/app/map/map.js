@@ -4,6 +4,7 @@ angular.module('app.map', ['ngOpenFB'])
   // methods to be used inside map.html
   $rootScope = {};
   $scope.user = {};
+  $rootScope.userData = {};
   $scope.user.id = ClientHelper.storage[0].id;
   $scope.user.userName = ClientHelper.storage[0].name;
   $scope.user.userPic = ClientHelper.storage[0].picture;
@@ -20,7 +21,8 @@ angular.module('app.map', ['ngOpenFB'])
   });
 
   var cb = function (pos) {
-    angular.extend($scope.user, pos);
+    angular.extend($scope.user, pos);//TO DO
+    angular.extend($rootScope.userData, pos);
     console.log('>>>>>',pos);
     //will emit to a room joined
     socket.emit('userData', $scope.user);
@@ -53,8 +55,8 @@ angular.module('app.map', ['ngOpenFB'])
 
   $scope.goToStreetView = function () {
     console.log("We are here, goToStreetView");
-    $interval.cancel($scope.intervalFunc);
-    $location.path('streetView');
+    //$interval.cancel($scope.intervalFunc);
     $rootScope.currentStreetViewUser = $scope.user.id;
+    $location.path('streetView');
   }
 }]);

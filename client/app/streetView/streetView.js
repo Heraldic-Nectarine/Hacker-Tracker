@@ -26,28 +26,37 @@ angular.module('app.streetview', ['ngOpenFB'])
 
   $scope.user = {};
   $scope.user.id = $rootScope.currentStreetViewUser;
+  // $scope.test = {};
+  // $scope.test.title = 'a';
+  // $scope.$watch('streetViewParams')
+  
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
+    console.log(data);
     console.log('Received');
   });
 
   var cb = function (pos) {
     angular.extend($scope.user, pos);
     $scope.streetViewParams.location = pos.latitude + ',' + pos.longitude;
-    console.log('>>>>>',pos);
+    // console.log('>>>>>',pos);
     socket.emit('userData', $scope.user);
+    // $scope.test.title = 'Through my Eyes';
 
     //NEED TO SET THE STREET VIEW URL
-    debugger;
-    $scope.streetViewImg = _.reduce($scope.streetViewParams, function (memo, val, i) {
-      return memo + i + '=' + val.toString() + '&';
-    }, $scope.streetViewURL + '?');//need to remove this ampersand at the end
-
-    $scope.test = 'Through my Eyes';
+    //debugger;
+    $scope.$apply(function() {
+      $scope.streetViewImg = _.reduce($scope.streetViewParams, function (memo, val, i) {
+        return memo + i + '=' + val.toString() + '&';
+      }, $scope.streetViewURL + '?');//need to remove this ampersand at the end
+    });
+    console.log($scope.streetViewImg);
 
   }
-  ClientHelper.locationCheck(cb);
+  $interval( function ()  {
+    ClientHelper.locationCheck(cb);
+  }, 3000);
 
 
   
