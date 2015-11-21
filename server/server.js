@@ -1,11 +1,16 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 8000;
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var ExRouter = express.Router();
+var db = require('./db.js');
 
 require('./config/middleware.js')(app, express);
 
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+
+
+
 
 server.listen(port);
 
