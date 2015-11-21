@@ -33,6 +33,10 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.init = function () {
+    ClientHelper.getRooms()
+      .then(function (rooms){
+        $scope.rooms = rooms;
+      })
     $scope.mapName = ClientHelper.storage2[0];
     socket.emit('init', ClientHelper.storage2[0]);
     $scope.intervalFunc = $interval( function () {

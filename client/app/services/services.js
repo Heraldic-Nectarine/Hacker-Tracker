@@ -9,9 +9,16 @@ angular.module('app.services', [])
   };
 
   var saveMap = function (val) {
-    //upate this to write to DB
-
     storage2[0] = val;
+
+    //writes to DB
+    return $http({
+      url: '/api/rooms', 
+      method: 'POST', 
+      data: {
+        roomName: val.toString()
+      }
+    });
   }
 
   var locationCheck = function (cb) {
@@ -45,13 +52,21 @@ angular.module('app.services', [])
     });
   }
 
+  var getRooms = function (){
+    return $http({
+      method: 'GET', 
+      url: '/api/rooms'
+    });
+  }
+
   return {
     storage : storage,
     storage2 : storage2,
     getFBdata : getFBdata,
     saveMap :saveMap,
     locationCheck : locationCheck,
-    getStreetView : getStreetView
+    getStreetView : getStreetView, 
+    getRooms: getRooms
   }
 
 });
