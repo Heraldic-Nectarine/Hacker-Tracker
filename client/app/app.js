@@ -3,6 +3,7 @@ angular.module('app', [
   'app.home',
   'app.map',
   'app.maker',
+  'app.streetview',
   'app.services',
   'ngRoute',
   'ngMap'
@@ -28,6 +29,10 @@ angular.module('app', [
     .when('/mapMaker', {
       templateUrl: 'app/mapMaker/mapMaker.html',
       controller: 'MapMakerController'
+    })
+    .when('/streetView', {
+      templateUrl: 'app/streetView/streetView.html',
+      controller: 'StreetViewController'
     })
     .when('/logout', {
       redirectTo: '/home'

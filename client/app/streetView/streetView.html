@@ -5,16 +5,14 @@
       <ul class='nav'>
         <li><a href='#/facebook' class='index' ng-click="logOut()">Home</a></li>
         <li><a href='#/logout' class='create' ng-click="logOut(true)">Logout</a></li>
-        <li><a href='#/streetView'>Street View</a></li>
       </ul>
     </div>
   </div>
 
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
-  <h4>Map: {{mapName}}</h4>
-    <ng-map class="map" default-style="true" center="current-location" zoom="14">
-      <marker ng-repeat="client in tempDataStore" position="{{client.latitude}},{{client.longitude}}" class="mark" icon = {{client.userPic}}></marker>
-    </ng-map>
+    <h4>Map: {{mapName}}</h4>
+    <img src='https://maps.googleapis.com/maps/api/streetview?size=600x400&location=40.7256210,-73.988453&fov=90&heading=210&pitch=7&key=AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk'>
+    <img ng-repeat="client in tempDataStore" src="{{client.streetView}}">
   </div>
 
 </div>

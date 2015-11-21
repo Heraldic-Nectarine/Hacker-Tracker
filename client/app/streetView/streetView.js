@@ -1,7 +1,16 @@
-angular.module('app.map', ['ngOpenFB'])
+angular.module('app.streetview', ['ngOpenFB'])
 
-.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', function ($scope, $openFB, $interval, ClientHelper) {
-  // methods to be used inside map.html
+.controller('StreetViewController', ['$scope', '$openFB', '$interval', 'ClientHelper', function ($scope, $openFB, $interval, ClientHelper) {
+  $scope.user = {};
+  
+  ClientHelper.getStreetView
+    .then(function successCallback(response) {
+      $scope.user.streetView = response;
+    }, function errorCallback(response) {
+      console.error(response);
+  });
+
+
   $scope.user = {};
   $scope.user.id = ClientHelper.storage[0].id;
   $scope.user.userName = ClientHelper.storage[0].name;
@@ -14,13 +23,15 @@ angular.module('app.map', ['ngOpenFB'])
 
   socket.on('serverData', function (data) {
     $scope.tempDataStore = data;
-  });
+  })
 
   var cb = function (pos) {
     angular.extend($scope.user, pos);
     console.log('>>>>>',pos);
     socket.emit('userData', $scope.user);
   }
+  ClientHelper.locationCheck(cb);
+
   
 
   $scope.logOut = function (fb) {
