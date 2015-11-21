@@ -22,7 +22,7 @@
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
   <h4>Map: {{selectedRoom}}</h4>
     <ng-map class="map" default-style="true" center="current-location" zoom="14">
-      <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click='goToStreetView()'></marker>
+      <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click='goToStreetView(client)'></marker>
     </ng-map>
   </div>
   <div class='container'>

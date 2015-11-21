@@ -45,9 +45,5 @@ angular.module('app', [
       url: '/logout',
       redirectTo: '/home'
     });
-    // .state('map.streetView', {
-    //   url: '/streetView',
-    //   templateUrl: 'app/map/streetView-map.html'
-    // });
   
 });
