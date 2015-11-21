@@ -1,7 +1,8 @@
 angular.module('app.map', ['ngOpenFB'])
 
-.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', function ($scope, $openFB, $interval, ClientHelper) {
+.controller('MapController', ['$scope', '$rootScope', '$openFB', '$interval', 'ClientHelper', '$location', function ($scope, $rootScope, $openFB, $interval, ClientHelper, $location) {
   // methods to be used inside map.html
+  $rootScope = {};
   $scope.user = {};
   $scope.user.id = ClientHelper.storage[0].id;
   $scope.user.userName = ClientHelper.storage[0].name;
@@ -49,4 +50,10 @@ angular.module('app.map', ['ngOpenFB'])
     }, 3000);
   }
 
+
+  $scope.goToStreetView = function () {
+    console.log("We are here, goToStreetView");
+    $location.path('streetView');
+    $rootScope.currentStreetViewUser = $scope.user.id;
+  }
 }]);

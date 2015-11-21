@@ -14,4 +14,10 @@ module.exports = function (app, express) {
   
   //logger
   app.use(logger);
+  app.use( function (req, res, next) {
+    console.log('Received ' + req.method + ' from ' + req.path);
+    next();
+  });
+
+
 };
