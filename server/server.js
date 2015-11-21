@@ -10,8 +10,11 @@ var db = require('./db.js');
 var router = require('./router.js');
 
 require('./config/middleware.js')(app, express);
-app.use(ExRouter);
-router(ExRouter);
+
+//router setup
+app.use('/', expressRouter); 
+router(expressRouter);
+
 server.listen(port);
 
 var currentUsersInRoom = [];
@@ -24,7 +27,7 @@ io.on('connection', function (socket) {
 
     socket.on('userData', function (user) {
       currentUsersInRoom.push(user);
-      console.log(currentUsersInRoom);
+      //console.log(currentUsersInRoom);
       socket.emit('serverData', currentUsersInRoom);
     });
 

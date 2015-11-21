@@ -1,4 +1,5 @@
 var ReplayHandler = require('./replay/replayController.js');
+var roomsController = require('./rooms/roomsController.js');
 
 module.exports = function (router) { //might refactor to use _id
 	router.get('/api/rooms', roomsController.getRooms);

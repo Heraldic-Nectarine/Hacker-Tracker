@@ -15,6 +15,7 @@ angular.module('app.map', ['ngOpenFB'])
   socket.on('serverData', function (usersInRoom) {
     $scope.usersInRoom = usersInRoom;
     console.log("the user", usersInRoom[0]);
+    console.log("the user lat", usersInRoom[0].latitude);
   });
 
   var cb = function (pos) {
