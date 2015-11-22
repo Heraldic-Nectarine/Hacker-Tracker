@@ -26,8 +26,6 @@ var app = require('../server/server.js');
 
   });
 
-
-
   describe('Replay Creation: ', function() {
 
     it('It returns a newly created replay', function(done) {
@@ -85,18 +83,19 @@ var app = require('../server/server.js');
       });
     });
 
-    it('It should update replays title', function(done) {
-      var replay = {owner:"SomeNewOwner",title:"TESTITLE",path:[{lat:9999,lng:8888},{lat:9999,lng:8888}]}
-      request(app)
-      .post('/api/replays')
-      .send(replay)
-      .expect(200)
-      .end(function(err,resp){
-        if(err){
-          return console.log(err)
-        }
-        expect(resp.body.owner).to.equal("SomeNewOwner");
-        done();
-      });
-    });
+    // it('It should update replays title', function(done) {
+    //   var replay = {owner:"SomeNewOwner",title:"TESTITLE",path:[{lat:9999,lng:8888},{lat:9999,lng:8888}]}
+    //   request(app) // need to make update obj
+    //   .put('/api/replays')
+    //   .send(replay)
+    //   .expect(200)
+    //   .end(function(err,resp){
+    //     if(err){
+    //       return console.log(err)
+    //     }
+    //     expect(resp.body.owner).to.equal("SomeNewOwner");
+    //     done();
+    //   });
+    // });
+
 	});

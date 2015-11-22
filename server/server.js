@@ -37,25 +37,4 @@ io.on('connection', function (socket) {
   });
 });
 
-
-// io.on('connection', function (socket) {
-//   socket.on('init', function (data) {
-//     socket.join('/'+data);
-//     //set socket.room before adding data
-
-//     //storage === room 
-//     storage[data] = {};
-//     socket.on('userData', function (info) {
-//       //info === $scope.user from the front end
-//       storage[data][info.id] = info;
-//       socket.emit('serverData', storage[data]);
-//     });
-//     socket.on('logout', function (info) {
-//       delete storage[data][info];
-//       socket.leave('/'+data);
-//       socket.emit('serverData', storage[data]);
-//     })
-//   });
-// });
-
 module.exports = app;
