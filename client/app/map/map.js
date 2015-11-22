@@ -50,11 +50,14 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
 
-  $scope.goToStreetView = function (userData) {
-    // debugger;
-    // console.log('heres the username' + userData);
+  $scope.goToStreetView = function () {
+    var userid = arguments[1]['id'];
+    console.log('heres the userid' + userid);
+   
+    debugger;
 
-    ClientHelper.currentStreetViewUser = $scope.user.id;
+
+    ClientHelper.currentStreetViewUser = userid;
 
 
     $location.path('streetView');
