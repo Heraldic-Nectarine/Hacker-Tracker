@@ -4,7 +4,6 @@ module.exports = {
   
   getRooms: function (req, res, next){
    Rooms.find({}, function (err, rooms){
-    console.log("getting rooms", rooms);
       res.json(rooms);
     });
   }, 

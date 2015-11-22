@@ -14,9 +14,8 @@ angular.module('app.map', ['ngOpenFB'])
 
   //need to listen to specific room
   socket.on('serverData', function (usersInRoom) {
-    $scope.usersInRoom = usersInRoom;
-    console.log("the user", usersInRoom[0]);
-    console.log("the user lat", usersInRoom[0].latitude);
+    console.log("users in room sent from server", usersInRoom[$scope.selectedRoom]);
+    $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
   });
 
   var cb = function (pos) {
@@ -28,7 +27,7 @@ angular.module('app.map', ['ngOpenFB'])
 
   $scope.logOut = function (fb) {
     $interval.cancel($scope.intervalFunc);
-    socket.emit('logout', $scope.user.id);
+    socket.emit('logout', $scope.user);
     if (fb) {
       $openFB.logout();
     }
