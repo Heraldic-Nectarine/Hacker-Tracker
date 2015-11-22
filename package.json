@@ -2,7 +2,7 @@
   "name": "greenfield",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "nodemon server/server.js"
   },

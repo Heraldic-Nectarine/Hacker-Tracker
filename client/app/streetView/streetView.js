@@ -1,6 +1,6 @@
 angular.module('app.streetview', ['ngOpenFB'])
 
-.controller('StreetViewController', ['$scope', '$openFB', '$interval', 'ClientHelper', '$rootScope', function ($scope, $openFB, $interval, ClientHelper, $rootScope) {
+.controller('StreetViewController', ['$stateParams','$scope', '$openFB', '$interval', 'ClientHelper', '$rootScope', function ($stateParams,$scope, $openFB, $interval, ClientHelper, $rootScope) {
   // STREET VIEW QUERY DATA
   //>>>>>>>>>>>>>>>>>>>>>>>
   $scope.streetViewURL = 'http:\/\/maps.googleapis.com/maps/api/streetview';
@@ -12,6 +12,11 @@ angular.module('app.streetview', ['ngOpenFB'])
     size : '700x500'
   }
   //>>>>>>>>>>>>>>>>>>>>>>>
+  console.log("STATE OARAMS",window.CurrentReplayModel) // ==============================hello
+ 
+
+
+
 
   $scope.user = {};
   $scope.user.id = ClientHelper.currentStreetViewUser;

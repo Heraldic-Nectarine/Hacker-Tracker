@@ -5,6 +5,7 @@ angular.module('app', [
   'app.maker',
   'app.streetview',
   'app.services',
+  'app.replay',
   'ui.router',
   'ngMap'
 ])
@@ -40,6 +41,11 @@ angular.module('app', [
       url: '/streetView',
       templateUrl: 'app/streetView/streetView.html',
       controller: 'StreetViewController'
+    })
+    .state('replayList', {
+      url: '/replays',
+      templateUrl: 'app/replays/replays.html',
+      controller: 'ReplaysController'
     })
     .state('logout', {
       url: '/logout',
