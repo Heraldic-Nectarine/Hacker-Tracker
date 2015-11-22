@@ -14,7 +14,7 @@ angular.module('app.streetview', ['ngOpenFB'])
   //>>>>>>>>>>>>>>>>>>>>>>>
   console.log("STATE OARAMS",window.CurrentReplayModel) // ==============================hello
  
-
+  debugger;
 
 
 

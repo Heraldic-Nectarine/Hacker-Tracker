@@ -37,21 +37,23 @@ angular.module('app.services', [])
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
-  var getStreetView = function (data) {
-    debugger;
-    return $http({
-      method: 'GET',
-      url : 'https://maps.googleapis.com/maps/api/streetview',
-      //url: 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=40.7256210,-73.988453&fov=90&heading=210&pitch=7&key=AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
-      params: {
-        size : '1000x1000',
-        location : data.latitude + ',' + data.longitude, //verify what this provides
-        fov : 120,
-        //heading : 210,
-        pitch : 0,
-        key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk'
-      }
-    });
+  var getStreetView = function (lat, long) {
+
+    var streetViewURL = 'http:\/\/maps.googleapis.com/maps/api/streetview';
+
+    var streetViewParams = {
+      fov : 120,
+      pitch : 0, 
+      key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
+      size : '700x500',
+      location : lat + ',' + long
+    }
+
+    streetViewImg = _.reduce(streetViewParams, function (memo, val, i) {
+      return memo + i + '=' + val.toString() + '&';
+    }, streetViewURL + '?');
+
+    return streetViewImg;
   }
 
   var getRooms = function (){
@@ -61,6 +63,8 @@ angular.module('app.services', [])
     });
   }
   var currentStreetViewUser = '';
+
+
 
   return {
     storage : storage,
