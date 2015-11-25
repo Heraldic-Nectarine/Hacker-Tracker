@@ -18,6 +18,7 @@ server.listen(port);
 var currentUsersInRoom = {};
 
 io.on('connection', function (socket) {
+  console.log('I\'ve received a connection!');
 
   socket.on('connectToRoom', function (room) {
     var currentRoom = room;
@@ -27,7 +28,7 @@ io.on('connection', function (socket) {
     socket.on('userData', function (user) {
       var singleUser = {};
       singleUser[user.id] = user;
-      currentUsersInRoom[currentRoom] = singleUser;
+      currentUsersInRoom[currentRoom] = singleUser; // currenUsersInRoom = {<room name>:{id : {id: <id>, userName: <>, userPic: <>, latitude: <>, longitude: <> }}
       //console.log(currentUsersInRoom);
       console.log("current room on server", currentRoom);
       io.in(currentRoom).emit('serverData', currentUsersInRoom);

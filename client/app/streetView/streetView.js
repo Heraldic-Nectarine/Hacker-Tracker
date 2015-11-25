@@ -12,16 +12,12 @@ angular.module('app.streetview', ['ngOpenFB'])
     size : '700x500'
   }
   //>>>>>>>>>>>>>>>>>>>>>>>
-  console.log("STATE OARAMS",window.CurrentReplayModel) // ==============================hello
- 
-  debugger;
-
-
 
   $scope.user = {};
   $scope.user.id = ClientHelper.currentStreetViewUser;
 
   socket.on('serverData', function (data) {
+    data = data[ClientHelper.currentRoom];
     for ( var key in data ) {
       if ( data[key]['id'] === ClientHelper.currentStreetViewUser ) {
         console.log(data[key]['id'] + ',' + data[key]['userName'] + ',' + data[key]['latitude'] + ',' + data[key]['longitude']);
@@ -33,7 +29,7 @@ angular.module('app.streetview', ['ngOpenFB'])
       $scope.streetViewImg = _.reduce($scope.streetViewParams, function (memo, val, i) {
         return memo + i + '=' + val.toString() + '&';
       }, $scope.streetViewURL + '?');//need to remove this ampersand at the end
-    });
+    });// need to wrap within $scope.$apply so that streetViewImg change is detected
 
     //console.log($scope.streetViewImg);
     

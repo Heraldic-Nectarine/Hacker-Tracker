@@ -62,9 +62,10 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+  
   var currentStreetViewUser = '';
 
-
+  var currentRoom = '';
 
   return {
     storage : storage,
@@ -74,7 +75,8 @@ angular.module('app.services', [])
     locationCheck : locationCheck,
     getStreetView : getStreetView, 
     getRooms: getRooms,
-    currentStreetViewUser : currentStreetViewUser
+    currentStreetViewUser : currentStreetViewUser,
+    currentRoom
   }
 
 });
