@@ -67,6 +67,8 @@ angular.module('app.services', [])
 
   var currentRoom = '';
 
+  var currentPosition = {};
+  
   return {
     storage : storage,
     storage2 : storage2,
@@ -76,7 +78,8 @@ angular.module('app.services', [])
     getStreetView : getStreetView, 
     getRooms: getRooms,
     currentStreetViewUser : currentStreetViewUser,
-    currentRoom : currentRoom
+    currentRoom : currentRoom,
+    currentPosition: currentPosition
   }
 
 });
