@@ -17,6 +17,7 @@ angular.module('app.streetview', ['ngOpenFB'])
   $scope.user.id = ClientHelper.currentStreetViewUser;
 
   socket.on('serverData', function (data) {
+    console.log(ClientHelper.currentRoom);
     data = data[ClientHelper.currentRoom];
     for ( var key in data ) {
       if ( data[key]['id'] === ClientHelper.currentStreetViewUser ) {

@@ -4,7 +4,7 @@
   font-size: 80px;
   font-style: normal;
   font-variant: normal;
-  font-weight: 300;
+  font-weight: 400;
   padding: 20px;
   line-height: 26.3999996185303px;
   text-align: center;
@@ -46,4 +46,8 @@
 
 .street-view {
   width : 100%;
+}
+
+#fb-redirect {
+  text-align: center;
 }

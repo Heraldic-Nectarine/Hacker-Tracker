@@ -71,12 +71,12 @@ angular.module('app.services', [])
     storage : storage,
     storage2 : storage2,
     getFBdata : getFBdata,
-    saveMap :saveMap,
+    saveMap : saveMap,
     locationCheck : locationCheck,
     getStreetView : getStreetView, 
     getRooms: getRooms,
     currentStreetViewUser : currentStreetViewUser,
-    currentRoom
+    currentRoom : currentRoom
   }
 
 });
