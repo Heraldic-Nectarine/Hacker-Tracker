@@ -1,10 +1,11 @@
 angular.module('app.map', ['ngOpenFB'])
 
 .controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', '$location', function ($scope, $openFB, $interval, ClientHelper, $location) {
-  $scope.user = {};
-  $scope.user.id = ClientHelper.storage[0].id;
-  $scope.user.userName = ClientHelper.storage[0].name;
-  $scope.user.userPic = ClientHelper.storage[0].picture;
+  $scope.user = {
+    id : ClientHelper.storage[0].id,
+    userName : ClientHelper.storage[0].name,
+    userPic : ClientHelper.storage[0].picture
+  }
   $scope.mapName = "";
   $scope.intervalFunc; // needs to be globally accessible within this controller
 
