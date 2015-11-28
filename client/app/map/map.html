@@ -7,12 +7,12 @@
         <li><a href='#/logout' class='create' ng-click="logOut(true)">Logout</a></li>
 
         <!-- show list of rooms - call db to get  -->
-<!--         <form name="roomForm"> 
+        <form name="roomForm"> 
         <select name="roomSelect" id="roomSelect" ng-model="selectedRoom" ng-change="setupConnection()">
           <option>--Select a Room--</option>
           <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
         </select>
-        </form>  -->
+        </form> 
 
       </ul>
     </div>
@@ -20,9 +20,9 @@
   <div class = 'col-md-12 col-sm-12 col-xs-12'>
 <!--   <h4>Map: {{selectedRoom}}</h4> -->
     <ng-map class="map" default-style="true" center="{{gtest}}" zoom="14"><!-- center='current-position'  "{{user.latitude}},{{user.longitude}}"-->
-<!--       <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
+      <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
         
-      </marker> -->
+      </marker>
     </ng-map>
   </div>
 </div>

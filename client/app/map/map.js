@@ -13,13 +13,13 @@ angular.module('app.map', ['ngOpenFB'])
   $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
 
 
-  //need to listen to specific room
-  // socket.on('serverData', function (usersInRoom) {
-  //   $scope.$apply(function () {
-  //     $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
-  //   });
-  //   // need to wrap in $scope.$apply so that usersInRoom change is immediately detected.
-  // });
+  // need to listen to specific room
+  socket.on('serverData', function (usersInRoom) {
+    $scope.$apply(function () {
+      $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
+    });
+    // need to wrap in $scope.$apply so that usersInRoom change is immediately detected.
+  });
 
   var cb = function (pos) {
     $scope.$apply(function () {
@@ -40,15 +40,15 @@ angular.module('app.map', ['ngOpenFB'])
     }
   }
 
-  $scope.rooms = '';//TESTING
+  // $scope.rooms = '';//TESTING
 
 
-  // $scope.init = function () {
-  //   ClientHelper.getRooms()
-  //     .then(function (rooms){
-  //       $scope.rooms = rooms;
-  //     })  
-  // }
+  $scope.init = function () {
+    ClientHelper.getRooms()
+      .then(function (rooms){
+        $scope.rooms = rooms;
+      })  
+  }
 
   $scope.setupConnection = function () {
     console.log("setting up");
@@ -56,9 +56,9 @@ angular.module('app.map', ['ngOpenFB'])
     console.log(ClientHelper.currentRoom);
     socket.emit('connectToRoom', $scope.selectedRoom);
     ClientHelper.locationCheck(cb);
-    // $scope.intervalFunc = $interval( function () {
-    //   ClientHelper.locationCheck(cb);
-    // }, 3000);
+    $scope.intervalFunc = $interval( function () {
+      ClientHelper.locationCheck(cb);
+    }, 3000);
   }
 
 
