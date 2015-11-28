@@ -4,10 +4,14 @@ angular.module('app.map', ['ngOpenFB'])
   $scope.user = {
     id : ClientHelper.storage[0].id,
     userName : ClientHelper.storage[0].name,
-    userPic : ClientHelper.storage[0].picture
+    userPic : ClientHelper.storage[0].picture,
+    latitude : ClientHelper.currentPosition.latitude,
+    longitude : ClientHelper.currentPosition.longitude
   }
   $scope.mapName = "";
   $scope.intervalFunc; // needs to be globally accessible within this controller
+  $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
+
 
   //need to listen to specific room
   // socket.on('serverData', function (usersInRoom) {
@@ -18,7 +22,12 @@ angular.module('app.map', ['ngOpenFB'])
   // });
 
   var cb = function (pos) {
-    angular.extend($scope.user, pos);
+    $scope.$apply(function () {
+      // angular.extend($scope.user, pos);
+      $scope.user.latitude = pos.latitude;
+      $scope.user.longitude = pos.longitude;
+      console.log(pos);
+    });
     socket.emit('userData', $scope.user);
   }
   
@@ -41,7 +50,7 @@ angular.module('app.map', ['ngOpenFB'])
   //     })  
   // }
 
-  $scope.setupConnection = function (){
+  $scope.setupConnection = function () {
     console.log("setting up");
     ClientHelper.currentRoom = $scope.selectedRoom;
     console.log(ClientHelper.currentRoom);
