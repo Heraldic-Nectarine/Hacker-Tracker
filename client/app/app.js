@@ -7,7 +7,8 @@ angular.module('app', [
   'app.services',
   'app.replay',
   'ui.router',
-  'ngMap'
+  'ngMap',
+  'ngMaterial'
 ])
 
 .config( function($stateProvider, $urlRouterProvider) {
