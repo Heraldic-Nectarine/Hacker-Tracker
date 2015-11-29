@@ -9,7 +9,6 @@ angular.module('app.maker', ['ngOpenFB'])
   ];//TO DO 
 
   $scope.createRoom = function () {
-    console.log($scope.mapName);
     ClientHelper.saveMap($scope.mapName);
     $location.path('/map');
   }
