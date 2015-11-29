@@ -1,6 +1,7 @@
 angular.module('app', [
   'app.facebook',
   'app.home',
+  'app.signup',
   'app.map',
   'app.maker',
   'app.streetview',
@@ -11,7 +12,7 @@ angular.module('app', [
   'ngMaterial'
 ])
 
-.config( function($stateProvider, $urlRouterProvider) {
+.config( function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
   $urlRouterProvider.otherwise('/home');
 
   $stateProvider
@@ -22,6 +23,11 @@ angular.module('app', [
       url: '/home',
       templateUrl: 'app/home/home.html',
       controller: 'HomeController'
+    })
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'app/signup/signup.html',
+      controller: 'SignupController'
     })
     .state('facebook', {
       url: '/facebook',
@@ -52,5 +58,10 @@ angular.module('app', [
       url: '/logout',
       redirectTo: '/home'
     });
+
+
+    $mdThemingProvider.theme('default')
+        .primaryPalette('indigo')
+        .accentPalette('red');
   
 });
