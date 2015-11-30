@@ -4,12 +4,12 @@ var port = process.env.PORT || 8000;
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var expressRouter = express.Router();
 var db = require('./db.js');
 var router = require('./router.js');
-
 require('./config/middleware.js')(app, express);
+var session = require('express-session')
+app.use(session({secret: 'THE_NSA_WILL_NEVER_GET_THIS'})); //we should look into useing a session store service. Redis or Mongo!
 
 router(expressRouter);
 app.use('/',expressRouter);
@@ -22,14 +22,12 @@ io.on('connection', function (socket) {
 
   socket.on('connectToRoom', function (room) {
     var currentRoom = room;
-    //console.log("room on server", currentRoom);
     socket.join(currentRoom);
 
     socket.on('userData', function (user) {
       var singleUser = {};
       singleUser[user.id] = user;
       currentUsersInRoom[currentRoom] = singleUser; // currenUsersInRoom = {<room name>:{id : {id: <id>, userName: <>, userPic: <>, latitude: <>, longitude: <> }}
-      //console.log(currentUsersInRoom);
       console.log("current room on server", currentRoom);
       io.in(currentRoom).emit('serverData', currentUsersInRoom);
     });

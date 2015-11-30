@@ -1,4 +1,6 @@
 var Replay = require('./replayModel.js');
+var _error = require("../errorHandler.js")
+
 
 module.exports = {
 
@@ -18,7 +20,7 @@ module.exports = {
 		Replay.find(options).limit(limit).exec(function ( err,response ) {
 			if(err) {
 				console.log("=-=-=-=-=-=-=-=-=GET-ALL-REPLAYS=-=-=-=-=-=-=-=-= \n",err);
-				return resp.send("Something went wrong. GETALLREPLAYS",404);
+				return resp.status(404).send(_error("GETALLREPLAYS"));
 			}
 			resp.send(response);
 		});
@@ -32,7 +34,7 @@ module.exports = {
 		Replay.findOne(options).exec(function(err,response){
 			if(err){
 				console.log("=-=-=-=-=-=-=-=-=GET-ONE-REPLAY=-=-=-=-=-=-=-=-= \n",err);
-				return resp.send("Something went wrong. GETONEREPLAY",404);
+				return resp.status(404).send(_error("GETONEREPLAY"));
 			}
 			resp.send(response);
 		});
@@ -46,7 +48,7 @@ module.exports = {
 
 			if(err){
 				console.log("=-=-=-=-=-=-=-=-=INSERT-REPLAY=-=-=-=-=-=-=-=-= \n",err);
-				return res.send("Something went wrong. INSERTREPLAY",404);
+				return res.status(404).send(_error("INSERTREPLAY"));
 			}
 			console.log("Success");
 			resp.send(replayObj);
@@ -59,7 +61,7 @@ module.exports = {
 		Replay.find({owner:req.body.owner,title:req.body.title}).remove(function(err,response){
 			if(err){
 				console.log("=-=-=-=-=-=-=-=-=DELETE-REPLAY=-=-=-=-=-=-=-=-= \n",err);
-				return res.send("Something went wrong. DELETEREPLAY",404);
+				return res.status(404).send(_error("DELETEREPLAY"));
 			}
 			resp.send(response);
 		});
@@ -71,13 +73,13 @@ module.exports = {
 		Replay.findOne({owner:req.params.owner,title:req.params.title},function(err,replayObj){
 			if(err){
 				console.log("=-=-=-=-=-=-=-=-=UPDATE-REPLAY=-=-=-=-=-=-=-=-= \n",err);
-				return resp.send("Something went wrong. UPDATE-REPLAY-FIND",404);
+				return resp.status(404).send(_error("UPDATE-REPLAY-FIND"));
 			}
 			var newTitle = req.body.newTitle;
 			replayObj.title = newTitle;
 			replayObj.save(function(err,obj){
 				if(err){
-					return resp.send("Something went wrong. UPDATE-REPLAY-SAVE",404)
+					return resp.status(404).send(_error("UPDATE-REPLAY-SAVE"));
 				}
 				resp.send(obj);
 			});

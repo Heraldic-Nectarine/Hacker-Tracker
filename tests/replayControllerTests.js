@@ -15,7 +15,7 @@ var app = require('../server/server.js');
       console.log("Successfully Cleared the DB")
     })
 
-    new Replay({owner:"TestOwner",title:"Test Title",path:[{lat:123,lng:312},{lat:123,lng:312},{lat:123,lng:312}]}).save(function(err,success){
+    new Replay({owner:"TestOwner",title:"TestTitle",path:[{lat:123,lng:312},{lat:123,lng:312},{lat:123,lng:312}]}).save(function(err,success){
       if(err){
         return console.log("There was an error in the beforeEach stuff");
       }
@@ -68,10 +68,10 @@ var app = require('../server/server.js');
       done();
     });
 
-    it('It creates a new replay and makes it available by `owner` ', function(done) {
-      var replay = {owner:"SomeNewOwner",title:"TESTITLE",path:[{lat:9999,lng:8888},{lat:9999,lng:8888}]}
+    it('It should update a replay\'s title ', function(done) {
+      var replay = {newTitle:"THENEWESTTITLE"}
       request(app)
-      .post('/api/replays')
+      .put('/api/replays/SomeNewOwner/TestTitle')
       .send(replay)
       .expect(200)
       .end(function(err,resp){
@@ -83,19 +83,5 @@ var app = require('../server/server.js');
       });
     });
 
-    // it('It should update replays title', function(done) {
-    //   var replay = {owner:"SomeNewOwner",title:"TESTITLE",path:[{lat:9999,lng:8888},{lat:9999,lng:8888}]}
-    //   request(app) // need to make update obj
-    //   .put('/api/replays')
-    //   .send(replay)
-    //   .expect(200)
-    //   .end(function(err,resp){
-    //     if(err){
-    //       return console.log(err)
-    //     }
-    //     expect(resp.body.owner).to.equal("SomeNewOwner");
-    //     done();
-    //   });
-    // });
 
 	});
