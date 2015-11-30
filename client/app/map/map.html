@@ -1,8 +1,7 @@
-
 <div ng-init='init()' flex layout='row'>
   <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
     <!-- <img src="{{user.userPic}}"> -->
-    <p class='md-subhead'>{{user.userName}}</p>
+    <p class='md-title'>{{user.userName}}</p>
 
 
     <!-- show list of rooms - call db to get  -->
@@ -16,8 +15,8 @@
     <p class='md-subhead'>Join Room</p>
     <form name='joinRoom'>
       <md-input-container>
-        <label>Select a Room</label>
-        <md-select ng-model='selectedRoom' ng-change='setupConnection()'>
+        <!-- <label>Select a Room</label> -->
+        <md-select ng-model='selectedRoom' ng-change='setupConnection()' placeholder='bleh'>
           <md-option ng-repeat="room in rooms.data" value="{{room.roomName}}">
             {{room.roomName}}
           </md-option>
@@ -25,14 +24,14 @@
       </md-input-container>
       <!-- <md-button type='submit' class='md-raised md-primary'>Join</md-button> -->
     </form>
-    <md-divider></md-divider>
-    <p class='md-subhead'>Room Manager</p>
+<!--     <md-divider></md-divider>
+    <p class='md-subhead'>Room Manager</p> -->
 
   </md-sidenav>
 
   <md-content flex>
 <!--   <h4>Map: {{selectedRoom}}</h4> -->
-    <p class='md-title'>{{selectedRoom}}</p>
+    <p class='md-title'>Room {{selectedRoom}}</p>
     <ng-map class="map" default-style="true" center="{{gtest}}" zoom="14"><!-- center='current-position'  "{{user.latitude}},{{user.longitude}}"-->
       <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
         

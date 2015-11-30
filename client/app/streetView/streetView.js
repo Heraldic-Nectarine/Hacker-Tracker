@@ -17,8 +17,8 @@ angular.module('app.streetview', ['ngOpenFB'])
   $scope.user.id = ClientHelper.currentStreetViewUser;
 
   socket.on('serverData', function (data) {
-    console.log(ClientHelper.currentRoom);
-    data = data[ClientHelper.currentRoom];
+    console.log('from ClientHelper:',ClientHelper.getCurrentRoom());
+    data = data[ClientHelper.getCurrentRoom()];
     for ( var key in data ) {
       if ( data[key]['id'] === ClientHelper.currentStreetViewUser ) {
         console.log(data[key]['id'] + ',' + data[key]['userName'] + ',' + data[key]['latitude'] + ',' + data[key]['longitude']);
@@ -48,22 +48,4 @@ angular.module('app.streetview', ['ngOpenFB'])
 
 // <<<<<<END GET MY LOCATION
 
-
-  
-
-  // $scope.logOut = function (fb) {
-  //   $interval.cancel($scope.intervalFunc);
-  //   socket.emit('logout', $scope.user.id);
-  //   if (fb) {
-  //     $openFB.logout();
-  //   }
-  // }
-
-  // $scope.init = function () {
-  //   $scope.mapName = ClientHelper.storage2[0];
-  //   socket.emit('init', ClientHelper.storage2[0]);
-  //   $scope.intervalFunc = $interval( function () {
-  //     ClientHelper.locationCheck(cb);
-  //   }, 3000);
-  // }
 }]);

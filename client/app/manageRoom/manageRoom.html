@@ -1,15 +1,15 @@
-<md-content layout='row'>
+<md-content layout='row' ng-init='init()'>
 <!--   <div flex='33' style='background-color: blue'>
   </div> -->
   <div flex='33' flex-offset='33' layout='column'>
   <!-- <p class='md-title'>Room Manager</p> -->
     <p class='md-title'>Join a Room</p>
-    <form name='joinRoom' layout='column'>
+    <form name='joinRoomForm' layout='column' ng-submit='joinRoom()'>
       <md-input-container flex>
         <label>Room Name</label>
         <md-select ng-model='selectedRoom'>
-          <md-option ng-repeat="room in rooms">
-            {{room}}
+          <md-option ng-repeat="room in rooms.data" value="{{room.roomName}}">
+            {{room.roomName}}
           </md-option>
         </md-select>
       </md-input-container>
