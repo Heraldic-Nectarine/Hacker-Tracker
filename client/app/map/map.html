@@ -4,32 +4,24 @@
     <p class='md-title'>{{user.userName}}</p>
 
 
-    <!-- show list of rooms - call db to get  -->
-<!--     <form name="roomForm"> 
-    <select name="roomSelect" id="roomSelect" ng-model="selectedRoom" ng-change="setupConnection()">
-      <option>--Select a Room--</option>
-      <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
-    </select>
-    </form>  -->
+
     <md-divider></md-divider>
     <p class='md-subhead'>Join Room</p>
     <form name='joinRoom'>
       <md-input-container>
-        <!-- <label>Select a Room</label> -->
         <md-select ng-model='selectedRoom' ng-change='setupConnection()' placeholder='bleh'>
           <md-option ng-repeat="room in rooms.data" value="{{room.roomName}}">
             {{room.roomName}}
           </md-option>
         </md-select>
       </md-input-container>
-      <!-- <md-button type='submit' class='md-raised md-primary'>Join</md-button> -->
     </form>
 <!--     <md-divider></md-divider>
     <p class='md-subhead'>Room Manager</p> -->
 
   </md-sidenav>
 
-  <md-content flex>
+  <md-content layout='column' flex-offset='10' flex='80'>
 <!--   <h4>Map: {{selectedRoom}}</h4> -->
     <p class='md-title'>Room {{selectedRoom}}</p>
     <ng-map class="map" default-style="true" center="{{gtest}}" zoom="14"><!-- center='current-position'  "{{user.latitude}},{{user.longitude}}"-->
