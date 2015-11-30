@@ -1,70 +1,37 @@
-<md-content layout='column' layout-align='center'>
-<div flex>
-<p class='md-title'>Room Manager</p>
-<p class='md-subhead'>Join a Room</p>
-</div>
-<form name='joinRoom' layout='row'>
-  <md-input-container>
-    <label>Room Name</label>
-    <md-select ng-model='selectedRoom'>
-      <md-option ng-repeat="room in rooms">
-        {{room}}
-      </md-option>
-    </md-select>
-  </md-input-container>
-  <md-button type='submit' class='md-raised md-primary'>Join</md-button>
-</form>
+<md-content layout='row'>
+<!--   <div flex='33' style='background-color: blue'>
+  </div> -->
+  <div flex='33' flex-offset='33' layout='column'>
+  <!-- <p class='md-title'>Room Manager</p> -->
+    <p class='md-title'>Join a Room</p>
+    <form name='joinRoom' layout='column'>
+      <md-input-container flex>
+        <label>Room Name</label>
+        <md-select ng-model='selectedRoom'>
+          <md-option ng-repeat="room in rooms">
+            {{room}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-button type='submit' class='md-raised md-primary'>Join</md-button>
+    </form>
 
-<p class='md-subhead room-manager'>Create a Room</p>
+    <p class='md-title'>Create a Room</p>
 
 
-<div layout='row' layout-align='center'>
-  <div flex='50' layout='column'>
-  <form name='manageRoom' ng-submit="createRoom()">
-    <md-input-container flex='100'>
-      <label>Enter the name of the room</label>
-      <input type='text' ng-model="mapName" required>
-    </md-input-container>
-    <md-contact-chips placeholder="Add friends to room">
-    <!-- need to assign model to this -->
-    </md-contact-chips>
+    <form name='manageRoom' ng-submit="createRoom()" layout='column'>
+      <md-input-container>
+        <label>Enter the name of the room</label>
+        <input type='text' ng-model="mapName" required>
+      </md-input-container>
+      <md-contact-chips placeholder="Add friends to room">
+      <!-- need to assign model to this -->
+      </md-contact-chips>
 
-    <md-button type="submit" class='md-raised md-primary'>
-      Create
-    </md-button>
-  </form>
+      <md-button type="submit" class='md-raised md-primary'>
+        Create
+      </md-button>
+    </form>
+
   </div>
-</div>
-
-
-  <!-- <md-list>
-
-    <md-list-item>
-        <md-button>
-          <md-icon md-svg-src="../../img/settings.svg" class="md-avatar-icon"></md-icon>
-        <span>Lia Luogo</span>
-        </md-button>
-    </md-list-item>
-
-    <md-list-item>
-        <md-button>
-          <md-icon md-svg-src="../../img/settings.svg" class="md-avatar-icon"></md-icon>
-        <span>Lawrence Ray</span>
-        </md-button>
-    </md-list-item>
-
-  </md-list> -->
-
-<!-- <div class='md-subhead'>Edit Rooms</div>
-
-<md-list>
-
-  <md-list-item>
-  Washroom
-    <md-icon md-svg-src='../../img/settings.svg'></md-icon>
-  </md-list-item>
-  <md-list-item>Restroom</md-list-item>
-
-</md-list> -->
-
 </md-content>
