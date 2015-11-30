@@ -1,6 +1,20 @@
-var Rooms = require('./roomsModel.js');
+var Users = require('./usersModel.js');
 
 module.exports = {
+
+  loginHandler: function (req, res) {
+    //req.body.userName
+
+    //req.body.password
+
+    //req.body.profilePic
+
+    //how do we handle the id?
+  },
+
+  signupHandler: function (req, res) {
+
+  },
   
   getRooms: function (req, res, next){
    Rooms.find({}, function (err, rooms){
@@ -17,3 +31,6 @@ module.exports = {
     });
   }
 }
+
+
+

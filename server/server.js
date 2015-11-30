@@ -15,24 +15,29 @@ router(expressRouter);
 app.use('/',expressRouter);
 server.listen(port);
 
-var currentUsersInRoom = [];
-var currentRoom = "";
+var currentUsersInRoom = {};
 
 io.on('connection', function (socket) {
+  console.log('I\'ve received a connection!');
 
   socket.on('connectToRoom', function (room) {
-    console.log("room on server", room);
-    socket.join(room);
+    var currentRoom = room;
+    //console.log("room on server", currentRoom);
+    socket.join(currentRoom);
+
     socket.on('userData', function (user) {
-      currentUsersInRoom.push(user);
+      var singleUser = {};
+      singleUser[user.id] = user;
+      currentUsersInRoom[currentRoom] = singleUser; // currenUsersInRoom = {<room name>:{id : {id: <id>, userName: <>, userPic: <>, latitude: <>, longitude: <> }}
       //console.log(currentUsersInRoom);
-      socket.emit('serverData', currentUsersInRoom);
+      console.log("current room on server", currentRoom);
+      io.in(currentRoom).emit('serverData', currentUsersInRoom);
     });
 
     socket.on('logout', function (user) {
-      delete currentUsersInRoom[user];
-      socket.leave(room);
-      socket.emit('serverData', currentUsersInRoom);
+      delete currentUsersInRoom[currentRoom][user.id];
+      socket.leave(currentRoom);
+      io.in(currentRoom).emit('serverData', currentUsersInRoom);
     })
   });
 });

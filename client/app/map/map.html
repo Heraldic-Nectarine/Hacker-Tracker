@@ -1,37 +1,44 @@
 
-<div ng-init='init()'>
-  <div id='map'>
-    <div class='navbar col-md-4 col-sm-4 col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-6'>
-      <ul class='nav'>
-        <li><a href='#/facebook' class='index' ng-click="logOut()">Home</a></li>
-        <li><a href='#/logout' class='create' ng-click="logOut(true)">Logout</a></li>
-        <li><a href='#/streetView'>Street View</a></li>
+<div ng-init='init()' flex layout='row'>
+  <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+    <!-- <img src="{{user.userPic}}"> -->
+    <p class='md-subhead'>{{user.userName}}</p>
 
-        <!-- show list of rooms - call db to get  -->
-        <form name="roomForm"> 
-        <select name="roomSelect" id="roomSelect" ng-model="selectedRoom" ng-change="setupConnection()">
-          <option>--Select a Room--</option>
-          <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
-        </select>
-        </form> 
 
-      </ul>
-    </div>
-  </div>
+    <!-- show list of rooms - call db to get  -->
+<!--     <form name="roomForm"> 
+    <select name="roomSelect" id="roomSelect" ng-model="selectedRoom" ng-change="setupConnection()">
+      <option>--Select a Room--</option>
+      <option ng-repeat="room in rooms.data" value="{{room.roomName}}">{{room.roomName}}</option>
+    </select>
+    </form>  -->
+    <md-divider></md-divider>
+    <p class='md-subhead'>Join Room</p>
+    <form name='joinRoom'>
+      <md-input-container>
+        <label>Select a Room</label>
+        <md-select ng-model='selectedRoom' ng-change='setupConnection()'>
+          <md-option ng-repeat="room in rooms.data" value="{{room.roomName}}">
+            {{room.roomName}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <!-- <md-button type='submit' class='md-raised md-primary'>Join</md-button> -->
+    </form>
+    <md-divider></md-divider>
+    <p class='md-subhead'>Room Manager</p>
 
-  <div class = 'col-md-12 col-sm-12 col-xs-12'>
-  <h4>Map: {{selectedRoom}}</h4>
-    <ng-map class="map" default-style="true" center="current-location" zoom="14">
+  </md-sidenav>
+
+  <md-content flex>
+<!--   <h4>Map: {{selectedRoom}}</h4> -->
+    <p class='md-title'>{{selectedRoom}}</p>
+    <ng-map class="map" default-style="true" center="{{gtest}}" zoom="14"><!-- center='current-position'  "{{user.latitude}},{{user.longitude}}"-->
       <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
         
       </marker>
     </ng-map>
-  </div>
-  <div class='container'>
-    <div ui-view></div>
-  </div>
-
-
+  </md-content>
 </div>
 
 
