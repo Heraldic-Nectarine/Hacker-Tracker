@@ -1,0 +1,55 @@
+<md-content id='content' layout='column'> 
+  <br>
+  <md-button class='md-raised md-primary login-fb' ng-click = 'goToFacebook()'><!-- <a href='#/facebook' class='create'>Login with Facebook</a> -->
+  <!-- <img src='../img/facebook29.svg'></img> -->
+      Continue with Facebook
+  </md-button>
+  <br>
+
+  <div class='or'> or </div>
+
+  <div layout='row' layout-align='center'>
+    <div flex='50'>
+    <form>
+      <div layout='row'>
+
+      <md-input-container flex='50'>
+        <label>First Name</label>
+        <input type="text" required>
+      </md-input-container>
+      <md-input-container flex='50'>
+        <label>Last Name</label>
+        <input type="text" required>
+      </md-input-container>
+      </div>
+      <md-input-container>
+        <label>Email</label>
+        <input type="text" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Create a password</label>
+        <input type='text' required>
+      </md-input-container>
+      <div layout='row'>
+      <div flex='10'>
+        <div class='profile-pic md-whiteframe-1dp'>
+        </div>
+      </div>
+      <md-input-container flex='90'>
+        <label>Enter a link for your profile picture</label>
+        <input type='text' required>
+      </md-input-container>
+      </div>
+      
+      <md-button class='md-raised md-primary login-fb' ng-click = ''>
+          Sign up
+      </md-button>
+    </form>
+    </div>
+
+  </div>
+
+  <br>
+  <p class='login-question md-body-1'>Already have an account?</p>
+  <p class='login-or-signup md-body-2'><a href='#'>Login</a></p>
+</md-content>

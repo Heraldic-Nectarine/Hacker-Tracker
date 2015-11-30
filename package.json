@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "DEBUG=socket.io* nodemon server/server.js"
   },
   "license": "ISC",
   "devDependencies": {

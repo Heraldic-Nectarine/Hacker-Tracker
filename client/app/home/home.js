@@ -1,5 +1,7 @@
 angular.module('app.home', [])
 
-.controller('HomeController', ['$scope', function ($scope) {
-  // methods to be used inside home.html
+.controller('HomeController', ['$scope', '$location', function ($scope, $location) {
+  $scope.goToFacebook = function () {
+    $location.path('facebook');
+  }
 }]);

@@ -62,19 +62,24 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+  
   var currentStreetViewUser = '';
 
+  var currentRoom = '';
 
-
+  var currentPosition = {};
+  
   return {
     storage : storage,
     storage2 : storage2,
     getFBdata : getFBdata,
-    saveMap :saveMap,
+    saveMap : saveMap,
     locationCheck : locationCheck,
     getStreetView : getStreetView, 
     getRooms: getRooms,
-    currentStreetViewUser : currentStreetViewUser
+    currentStreetViewUser : currentStreetViewUser,
+    currentRoom : currentRoom,
+    currentPosition: currentPosition
   }
 
 });

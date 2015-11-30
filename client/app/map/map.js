@@ -1,26 +1,33 @@
 angular.module('app.map', ['ngOpenFB'])
 
-.controller('MapController', ['$scope', '$rootScope', '$openFB', '$interval', 'ClientHelper', '$location', function ($scope, $rootScope, $openFB, $interval, ClientHelper, $location) {
-  $rootScope = {};
-  $scope.user = {};
-  $rootScope.userData = {};
-  $scope.user.id = ClientHelper.storage[0].id;
-  $scope.user.userName = ClientHelper.storage[0].name;
-  $scope.user.userPic = ClientHelper.storage[0].picture;
-
+.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', '$location', function ($scope, $openFB, $interval, ClientHelper, $location) {
+  $scope.user = {
+    id : ClientHelper.storage[0].id,
+    userName : ClientHelper.storage[0].name,
+    userPic : ClientHelper.storage[0].picture,
+    latitude : ClientHelper.currentPosition.latitude,
+    longitude : ClientHelper.currentPosition.longitude
+  }
   $scope.mapName = "";
+  $scope.intervalFunc; // needs to be globally accessible within this controller
+  $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
 
-  $scope.intervalFunc;
 
-  //need to listen to specific room
+  // need to listen to specific room
   socket.on('serverData', function (usersInRoom) {
-    console.log("users in room sent from server", usersInRoom[$scope.selectedRoom]);
-    $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
+    $scope.$apply(function () {
+      $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
+    });
+    // need to wrap in $scope.$apply so that usersInRoom change is immediately detected.
   });
 
   var cb = function (pos) {
-    angular.extend($scope.user, pos);//TO DO
-    angular.extend($rootScope.userData, pos);
+    $scope.$apply(function () {
+      // angular.extend($scope.user, pos);
+      $scope.user.latitude = pos.latitude;
+      $scope.user.longitude = pos.longitude;
+      console.log(pos);
+    });
     socket.emit('userData', $scope.user);
   }
   
@@ -33,6 +40,9 @@ angular.module('app.map', ['ngOpenFB'])
     }
   }
 
+  // $scope.rooms = '';//TESTING
+
+
   $scope.init = function () {
     ClientHelper.getRooms()
       .then(function (rooms){
@@ -40,9 +50,12 @@ angular.module('app.map', ['ngOpenFB'])
       })  
   }
 
-  $scope.setupConnection = function (){
+  $scope.setupConnection = function () {
     console.log("setting up");
+    ClientHelper.currentRoom = $scope.selectedRoom;
+    console.log(ClientHelper.currentRoom);
     socket.emit('connectToRoom', $scope.selectedRoom);
+    ClientHelper.locationCheck(cb);
     $scope.intervalFunc = $interval( function () {
       ClientHelper.locationCheck(cb);
     }, 3000);
@@ -51,14 +64,7 @@ angular.module('app.map', ['ngOpenFB'])
 
   $scope.goToStreetView = function () {
     var userid = arguments[1]['id'];
-    console.log('heres the userid' + userid);
-   
-    debugger;
-
-
     ClientHelper.currentStreetViewUser = userid;
-
-
     $location.path('streetView');
   }
 }]);

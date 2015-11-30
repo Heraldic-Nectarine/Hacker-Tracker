@@ -1,8 +1,34 @@
-<div id='home'>
-  <div class='navbar col-md-4 col-sm-4 col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-6' >
-    <div class='nav'>
+<md-content id='content' layout='column'> 
+  <br>
+  <md-button class='md-raised md-primary login-fb' ng-click = 'goToFacebook()'><!-- <a href='#/facebook' class='create'>Login with Facebook</a> -->
+  <!-- <img src='../img/facebook29.svg'></img> -->
+      Continue with Facebook
+  </md-button>
+  <br>
 
-        <li><a href='#/facebook' class='create'>Login with Facebook</a></li>
+  <div class='or'> or </div>
+
+  <div layout='row' layout-align='center'>
+    <div flex='50'>
+    <form>
+      <md-input-container>
+        <label>Email</label>
+        <input type="text" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input type='text' required>
+      </md-input-container>
+      
+      <md-button class='md-raised md-primary login-fb' ng-click = 'goToFacebook()'>
+          Login
+      </md-button>
+    </form>
     </div>
+
   </div>
-</div>
+
+  <br>
+  <p class='login-question md-body-1'>Not signed up with us?</p>
+  <p class='login-or-signup md-body-2'><a href='#signup'>Sign Up</a></p>
+</md-content>
