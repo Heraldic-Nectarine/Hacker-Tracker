@@ -9,11 +9,11 @@ var AdminRoomSchema = new mongoose.Schema({
 }, { _id: false});
 
 var UserSchema = new mongoose.Schema({
-  firstNmae: String,
-  lastName: String,
-  email: String,
-  password: String,
-  profilePic : String
+  firstName: {type:String,required:true},
+  lastName: {type:String,required:true},
+  email: {type:String,required:true,unique:true},
+  password: {type:String,required:true},
+  profilePic : {type:String,required:true}
 });
 
 module.exports = mongoose.model('User', UserSchema);

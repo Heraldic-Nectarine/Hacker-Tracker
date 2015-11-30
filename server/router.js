@@ -5,8 +5,8 @@ module.exports = function (router) { //might refactor to use _id
 	router.get('/api/rooms', roomsController.getRooms);
 	router.post('/api/rooms', roomsController.saveRoom);
 
-  router.post('/login', usersController.loginHandler);
-  router.post('/signup', usersController.signupHandler);
+  router.post('/login', usersController.login);
+  router.post('/signup', usersController.signup);
 	
 	router.get('/api/replays',ReplayHandler.getAllReplays);
 	router.get('/api/replays/:owner/:title',ReplayHandler.getOneReplay);
