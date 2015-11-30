@@ -1,10 +1,9 @@
 var User = require('./usersModel.js');
 var bcrypt = require('bcrypt');
-var _error = require("../errorHandler.js");
+var _error = require("../handlers/errorHandler.js");
+var _success = require("../handlers/successHandler.js");
 
-
-
-function _buildErrorResponse (errorObj) {
+function _buildErrorResponse (errorObj) { //for multiple missing fields in mongo
   var response = [];
   for(var err in errorObj.errors){
     response.push(_error(errorObj.errors[err].message));
@@ -23,25 +22,30 @@ function _hashUserPassword (userObj,cb) {
   });
 }
 
-
 function _createSession (responseObj) {
-
-  //do something to make a session
-  //return the response obj
+  //do something?
+  return responseObj;
 }
-
-
 
 module.exports = {
 
+  logout: function (req,res) { //this literally does nothing atm.
+    req.session.destroy(function(err){
+      res.status(404).send(_error("LOGOUT"))
+    });
+    res.send(_success("You have been successfully logged out"));
+  },
+
   login: function (req, res) { //assumes {email:"something",password:"somethingElse"}
     User.find({email:req.body.email},function(err,result){
-      if(err) return res.status(404).send("Ther was an error handling your request - FINDUSER")
-      if(result.length === 0) return res.status(404).send("User does not exist!");
-      bcrypt.compare(req.body.password,result[0].password,function(err,result){
-        if(err) return res.status(404).send("There was an error handling your request - HASHCOMPARE");
-        if(!result) return res.status(404).send("Password invalid.");
-        return _createSession(res).send('...Something'); //whatever we want there
+      if(err) return res.status(404).send(_error("FINDUSER"))
+      if(result.length === 0) return res.status(404).send(_error("User does not exist!"));
+      bcrypt.compare(req.body.password,result[0].password,function(err,isPassword){
+        if(err) return res.status(404).send(_error("HASHCOMPARE"));
+        if(!isPassword) return res.status(404).send(_error("Password invalid"));
+        result = result[0];
+        req.session.user = result; //this totally stores the user pwd as well.
+        return _createSession(res).send(_success({firstName:result.firstName,email:result.email,profilePic:result.profilePic,id:result._id})); //whatever we want there
       });
     });
   },
@@ -51,21 +55,16 @@ module.exports = {
     newUser.validate(function(err){
       if(err) return res.status(404).send(_buildErrorResponse(err));
       _hashUserPassword(newUser,function(err,hashedUser){
-        if(err) return res.status(404).send("There was error handling your request - HASHPWD");
+        if(err) return res.status(404).send(_error("HASHPWD"));
         hashedUser.save(function(err,response){
           if(err) {
-            if(err.message.indexOf("duplicate key error index") !== -1) return res.status(404).send(_buildErrorResponse({err:{message:"Email is already in use"}}));
-            return res.status(404).send("There was an error handling your response - USERSAVE");
+            if(err.message.indexOf("duplicate key error index") !== -1) return res.status(404).send(_error("Email is already in use"));
+            return res.status(404).send(_error("USERSAVE"));
           }
           delete response.password; //dont want to send hashed password back, shouldnt matter though
-          res.send(response);
+          res.send(_success(response));
         });
       });
     });
   }
 }
-
-// // var testUser = {body:{firstName: 'TESTBVALUES',lastName:'TESTBVALUES',email:'TESTBVALUES',password:'pwd',profilePic:'TESTBVALUES' }};
-// var testLoginObj = {body:{email:"TESTBVALUES",password:"pwdasdasd"}}
-// // console.log(module.exports.signup(testUser));
-// console.log(module.exports.login(testLoginObj))
