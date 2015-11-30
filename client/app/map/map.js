@@ -32,7 +32,6 @@ angular.module('app.map', ['ngOpenFB'])
 
   var cb = function (pos) {
     $scope.$apply(function () {
-      // angular.extend($scope.user, pos);
 
       currLat = pos.latitude || currLat;
       currLong = pos.longitude || currLong;
@@ -53,8 +52,6 @@ angular.module('app.map', ['ngOpenFB'])
     }
   }
 
-
-
   $scope.init = function () {
     $scope.selectedRoom = ClientHelper.getCurrentRoom();
     $scope.setupConnection();
@@ -65,6 +62,7 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.setupConnection = function () {
+    $scope.allUsersInRoom = {};
     $interval.cancel($scope.intervalFunc);
     socket.emit('logout', $scope.user);
     ClientHelper.setRoom($scope.selectedRoom);
