@@ -1,5 +1,5 @@
 var Replay = require('./replayModel.js');
-var _error = require("../errorHandler.js")
+var _error = require("../handlers/errorHandler.js")
 
 
 module.exports = {
