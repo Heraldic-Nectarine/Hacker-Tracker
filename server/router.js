@@ -1,9 +1,12 @@
 var ReplayHandler = require('./replay/replayController.js');
 var roomsController = require('./rooms/roomsController.js');
-
+var usersController = require('./users/usersController.js');
 module.exports = function (router) { //might refactor to use _id
 	router.get('/api/rooms', roomsController.getRooms);
 	router.post('/api/rooms', roomsController.saveRoom);
+
+  router.post('/login', usersController.loginHandler);
+  router.post('/signup', usersController.signupHandler);
 	
 	router.get('/api/replays',ReplayHandler.getAllReplays);
 	router.get('/api/replays/:owner/:title',ReplayHandler.getOneReplay);

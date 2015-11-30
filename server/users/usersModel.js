@@ -9,7 +9,8 @@ var AdminRoomSchema = new mongoose.Schema({
 }, { _id: false});
 
 var UserSchema = new mongoose.Schema({
-  userName: String,
+  firstNmae: String,
+  lastName: String,
   email: String,
   password: String,
   profilePic : String

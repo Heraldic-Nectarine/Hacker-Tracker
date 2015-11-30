@@ -9,7 +9,7 @@ angular.module('app.streetview', ['ngOpenFB'])
     //heading : 235,
     pitch : 0, 
     key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
-    size : '700x500'
+    size : '1000x500'//700x500
   }
   //>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -44,7 +44,7 @@ angular.module('app.streetview', ['ngOpenFB'])
   }
   $interval( function ()  {
     ClientHelper.locationCheck(cb);
-  }, 3000);
+  }, 300000); //3000
 
 // <<<<<<END GET MY LOCATION
 
