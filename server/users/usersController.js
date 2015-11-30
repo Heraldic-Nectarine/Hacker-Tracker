@@ -1,12 +1,13 @@
 var User = require('./usersModel.js');
 var bcrypt = require('bcrypt');
+var _error = require("../errorHandler.js");
 
 
 
 function _buildErrorResponse (errorObj) {
   var response = [];
   for(var err in errorObj.errors){
-    response.push(errorObj.errors[err].message);
+    response.push(_error(errorObj.errors[err].message));
   }
   return response;
 }
@@ -35,14 +36,14 @@ module.exports = {
 
   login: function (req, res) { //assumes {email:"something",password:"somethingElse"}
     User.find({email:req.body.email},function(err,result){
-      if(err) return console.log("errrrrr",err);
-      if(result.length === 0) return console.log("User does not exist!");
+      if(err) return res.status(404).send("Ther was an error handling your request - FINDUSER")
+      if(result.length === 0) return res.status(404).send("User does not exist!");
       bcrypt.compare(req.body.password,result[0].password,function(err,result){
         if(err) return res.status(404).send("There was an error handling your request - HASHCOMPARE");
         if(!result) return res.status(404).send("Password invalid.");
-        return _createSession(res).send(); //whatever we want there
+        return _createSession(res).send('...Something'); //whatever we want there
       });
-    })
+    });
   },
 
   signup: function (req, res) {
