@@ -2,15 +2,19 @@ angular.module('app.services', [])
 
 .factory('ClientHelper', function ($http){
   var storage = [];
-  var storage2 = [];
 
+  var currentStreetViewUser = '';
+
+  var currentRoom = '';
+
+  var currentPosition = {};
 
   var getFBdata = function (val) {
     storage.push(val);
   };
 
   var saveMap = function (val) {
-    storage2[0] = val;
+    // storage2[0] = val;
 
     //writes to DB
     return $http({
@@ -20,6 +24,14 @@ angular.module('app.services', [])
         roomName: val.toString()
       }
     });
+  }
+
+  var setRoom = function (room) {
+    currentRoom = room;
+  }
+
+  var getCurrentRoom = function () {
+    return currentRoom;
   }
 
   var locationCheck = function (cb) {
@@ -63,15 +75,10 @@ angular.module('app.services', [])
     });
   }
   
-  var currentStreetViewUser = '';
-
-  var currentRoom = '';
-
-  var currentPosition = {};
   
   return {
     storage : storage,
-    storage2 : storage2,
+    // storage2 : storage2,
     getFBdata : getFBdata,
     saveMap : saveMap,
     locationCheck : locationCheck,
@@ -79,7 +86,9 @@ angular.module('app.services', [])
     getRooms: getRooms,
     currentStreetViewUser : currentStreetViewUser,
     currentRoom : currentRoom,
-    currentPosition: currentPosition
+    currentPosition: currentPosition,
+    setRoom : setRoom,
+    getCurrentRoom : getCurrentRoom
   }
 
 });

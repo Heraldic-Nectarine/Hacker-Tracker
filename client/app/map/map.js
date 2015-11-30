@@ -8,7 +8,6 @@ angular.module('app.map', ['ngOpenFB'])
     latitude : ClientHelper.currentPosition.latitude,
     longitude : ClientHelper.currentPosition.longitude
   }
-  $scope.mapName = "";
   $scope.intervalFunc; // needs to be globally accessible within this controller
   $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
 
@@ -23,7 +22,6 @@ angular.module('app.map', ['ngOpenFB'])
 
   var cb = function (pos) {
     $scope.$apply(function () {
-      // angular.extend($scope.user, pos);
       $scope.user.latitude = pos.latitude;
       $scope.user.longitude = pos.longitude;
       console.log(pos);
@@ -40,20 +38,19 @@ angular.module('app.map', ['ngOpenFB'])
     }
   }
 
-  // $scope.rooms = '';//TESTING
 
 
   $scope.init = function () {
+    $scope.selectedRoom = ClientHelper.getCurrentRoom();
+    $scope.setupConnection();
     ClientHelper.getRooms()
       .then(function (rooms){
         $scope.rooms = rooms;
-      })  
+      });
   }
 
   $scope.setupConnection = function () {
-    console.log("setting up");
-    ClientHelper.currentRoom = $scope.selectedRoom;
-    console.log(ClientHelper.currentRoom);
+    ClientHelper.setRoom($scope.selectedRoom);
     socket.emit('connectToRoom', $scope.selectedRoom);
     ClientHelper.locationCheck(cb);
     $scope.intervalFunc = $interval( function () {
