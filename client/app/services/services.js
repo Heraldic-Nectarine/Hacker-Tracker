@@ -118,7 +118,7 @@ angular.module('app.services', [])
   }
   
   
-  
+  }
   return {
     storage : storage,
     nativeLogin:nativeLogin,
