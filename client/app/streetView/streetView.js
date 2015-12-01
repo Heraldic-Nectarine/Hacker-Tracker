@@ -39,7 +39,7 @@ angular.module('app.streetview', ['ngOpenFB'])
   }
   $interval( function ()  {
     ClientHelper.locationCheck(cb);
-  }, 300000); //3000
+  }, 3000); //3000
 
 // <<<<<<END GET MY LOCATION
 
