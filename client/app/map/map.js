@@ -57,7 +57,7 @@ angular.module('app.map', ['ngOpenFB'])
     $scope.setupConnection();
     ClientHelper.getRooms()
       .then(function (rooms){
-        $scope.rooms = rooms;
+        $scope.rooms = rooms.data;
       });
   }
 

@@ -33,7 +33,7 @@ angular.module('app.maker', ['ngOpenFB'])
     console.log('init for manageRoom');
     ClientHelper.getRooms()
       .then(function (rooms){
-        $scope.rooms = rooms;
+        $scope.rooms = rooms.data;
       });
   }
 
