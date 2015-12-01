@@ -76,6 +76,7 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+
   var nativeRegister = function(firstName,lastName,profilePic,email,password,success,fail){
     var request = $http({
           url: '/signup', 
@@ -100,8 +101,22 @@ angular.module('app.services', [])
           }
         });
     return request.then(success,fail);
-  
   }
+
+  var saveRec = function (recObj){
+    console.log("rec obj to write", recObj);
+    return $http({
+      method: 'POST', 
+      url: '/api/replays', 
+      data: {
+        "path": recObj.path, 
+        "owner": recObj.owner, 
+        "title": recObj.title
+      }
+    })
+
+  }
+  
   return {
     storage : storage,
     nativeLogin:nativeLogin,
@@ -116,7 +131,8 @@ angular.module('app.services', [])
     currentRoom : currentRoom,
     currentPosition: currentPosition,
     setRoom : setRoom,
-    getCurrentRoom : getCurrentRoom
+    getCurrentRoom : getCurrentRoom, 
+    saveRec: saveRec
   }
 
 });

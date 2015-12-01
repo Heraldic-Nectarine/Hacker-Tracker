@@ -15,12 +15,12 @@ angular.module('app.map', ['ngOpenFB'])
   // need to listen to specific room
   socket.on('serverData', function (usersInRoom) {
     $scope.$apply(function () {
-      console.log("users in room: ", usersInRoom[$scope.selectedRoom]);
+      //console.log("users in room: ", usersInRoom[$scope.selectedRoom]);
       var usersFromServer = usersInRoom[$scope.selectedRoom];
 
       //create client-side user object
       for (var userId in usersFromServer){
-        console.log("user ", usersFromServer[userId]);
+        //console.log("user ", usersFromServer[userId]);
         $scope.allUsersInRoom[userId] = usersFromServer[userId]; 
       }
     });
@@ -29,6 +29,8 @@ angular.module('app.map', ['ngOpenFB'])
 
   var currLat = 0; 
   var currLong = 0;
+  var record = false;
+  var recorded = [];
 
   var cb = function (pos) {
     $scope.$apply(function () {
@@ -38,11 +40,32 @@ angular.module('app.map', ['ngOpenFB'])
 
       $scope.user.latitude = currLat 
       $scope.user.longitude = currLong;
+
+      //record session 
+      if(record){
+        recorded.push({"lat": currLat, "lng": currLong});
+      }
       console.log(pos);
     });
     socket.emit('userData', $scope.user);
   }
   
+  $scope.startRec = function (){
+    record = true;
+  }
+
+  $scope.stopRec = function (){
+    record = false;
+  }
+
+  $scope.saveRec = function (){
+    var recObj = {
+      "owner": $scope.user.id, 
+      "title": $scope.user.userName, 
+      "path": recorded
+    }
+    ClientHelper.saveRec(recObj);
+  }
 
   $scope.logOut = function (fb) {
     $interval.cancel($scope.intervalFunc);
