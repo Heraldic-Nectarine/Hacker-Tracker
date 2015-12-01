@@ -23,8 +23,8 @@ module.exports = {
   }, 
 
   saveRoom: function (req, res){ //assumes {roomName:'Foo', id:"something"} USERS ID!!!! NOT ROOM ID
-    //need to add users allowed in room
-    var newRoom = new Room({roomName: req.body.roomName,roomAdmins:[req.body.id]});
+    var newRoom = new Room({roomName: req.body.roomName});
+    newRoom.roomAdmins.push({userId:req.body.id});
     newRoom.save(function (err,newRoom){
       if(err) return res.status(404).send(_error(err));
       res.send(_success(newRoom));
