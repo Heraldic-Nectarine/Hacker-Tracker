@@ -37,10 +37,11 @@ module.exports = {
   },
 
   login: function (req, res) { //assumes {email:"something",password:"somethingElse"}
-    User.find({email:req.body.email},function(err,result){
+    console.log(req.body.email.email);
+    User.find({email:req.body.email.email},function(err,result){
       if(err) return res.status(404).send(_error("FINDUSER"));
       if(result.length === 0) return res.status(404).send(_error("User does not exist!"));
-      bcrypt.compare(req.body.password,result[0].password,function(err,isPassword){
+      bcrypt.compare(req.body.email.password,result[0].password,function(err,isPassword){
         if(err) return res.status(404).send(_error("HASHCOMPARE"));
         if(!isPassword) return res.status(404).send(_error("Password invalid"));
         result = result[0];

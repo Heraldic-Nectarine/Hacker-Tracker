@@ -4,7 +4,7 @@ angular.module('app.home', [])
   
 	function LoginSuccess(a,b){
   	services.storage.push(a);
-  	state.go("manageRoom");
+  	$location.path("manageRoom");
 
 	}
 	function LoginFail(a,b){
