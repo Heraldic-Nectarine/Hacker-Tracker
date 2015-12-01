@@ -1,5 +1,4 @@
 var Replay = require('./replayModel.js');
-
 var _error = require("../handlers/errorHandler.js");
 var _success = require("../handlers/successHandler.js");
 
@@ -44,7 +43,7 @@ module.exports = {
 		newReplay.save(function(err,replayObj){
 
 			if(err){
-				return resp.status(404).send(_error("INSERTREPLAY"));
+				return resp.status(404).send(_error("INSERTREPLAY", err));
 			}
 			console.log("Success");
 			resp.send(_success(replayObj));
