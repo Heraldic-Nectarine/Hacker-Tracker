@@ -31,14 +31,14 @@ module.exports = {
 
   logout: function (req,res) { //this literally does nothing atm.
     req.session.destroy(function(err){
-      res.status(404).send(_error("LOGOUT"))
+      res.status(404).send(_error("LOGOUT"));
     });
     res.send(_success("You have been successfully logged out"));
   },
 
   login: function (req, res) { //assumes {email:"something",password:"somethingElse"}
     User.find({email:req.body.email},function(err,result){
-      if(err) return res.status(404).send(_error("FINDUSER"))
+      if(err) return res.status(404).send(_error("FINDUSER"));
       if(result.length === 0) return res.status(404).send(_error("User does not exist!"));
       bcrypt.compare(req.body.password,result[0].password,function(err,isPassword){
         if(err) return res.status(404).send(_error("HASHCOMPARE"));
