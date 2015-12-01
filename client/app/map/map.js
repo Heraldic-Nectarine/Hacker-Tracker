@@ -10,20 +10,34 @@ angular.module('app.map', ['ngOpenFB'])
   }
   $scope.intervalFunc; // needs to be globally accessible within this controller
   $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
-
+  $scope.allUsersInRoom = {};
 
   // need to listen to specific room
   socket.on('serverData', function (usersInRoom) {
     $scope.$apply(function () {
-      $scope.usersInRoom = usersInRoom[$scope.selectedRoom];
+      console.log("users in room: ", usersInRoom[$scope.selectedRoom]);
+      var usersFromServer = usersInRoom[$scope.selectedRoom];
+
+      //create client-side user object
+      for (var userId in usersFromServer){
+        console.log("user ", usersFromServer[userId]);
+        $scope.allUsersInRoom[userId] = usersFromServer[userId]; 
+      }
     });
     // need to wrap in $scope.$apply so that usersInRoom change is immediately detected.
   });
 
+  var currLat = 0; 
+  var currLong = 0;
+
   var cb = function (pos) {
     $scope.$apply(function () {
-      $scope.user.latitude = pos.latitude;
-      $scope.user.longitude = pos.longitude;
+
+      currLat = pos.latitude || currLat;
+      currLong = pos.longitude || currLong;
+
+      $scope.user.latitude = currLat 
+      $scope.user.longitude = currLong;
       console.log(pos);
     });
     socket.emit('userData', $scope.user);
@@ -38,8 +52,6 @@ angular.module('app.map', ['ngOpenFB'])
     }
   }
 
-
-
   $scope.init = function () {
     $scope.selectedRoom = ClientHelper.getCurrentRoom();
     $scope.setupConnection();
@@ -50,6 +62,9 @@ angular.module('app.map', ['ngOpenFB'])
   }
 
   $scope.setupConnection = function () {
+    $scope.allUsersInRoom = {};
+    $interval.cancel($scope.intervalFunc);
+    socket.emit('logout', $scope.user);
     ClientHelper.setRoom($scope.selectedRoom);
     socket.emit('connectToRoom', $scope.selectedRoom);
     ClientHelper.locationCheck(cb);

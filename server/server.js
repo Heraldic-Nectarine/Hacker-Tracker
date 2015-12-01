@@ -24,17 +24,22 @@ io.on('connection', function (socket) {
     var currentRoom = room;
     socket.join(currentRoom);
 
+    var users = {};
+    
     socket.on('userData', function (user) {
-      var singleUser = {};
-      singleUser[user.id] = user;
-      currentUsersInRoom[currentRoom] = singleUser; // currenUsersInRoom = {<room name>:{id : {id: <id>, userName: <>, userPic: <>, latitude: <>, longitude: <> }}
-      console.log("current room on server", currentRoom);
+      //console.log("user coming in ", user);
+      users[user.id] = user;
+      currentUsersInRoom[currentRoom] = users; // currenUsersInRoom = {<room name>:{id : {id: <id>, userName: <>, userPic: <>, latitude: <>, longitude: <> }}
+      console.log(currentUsersInRoom);
+      //console.log("current room on server", currentRoom);
       io.in(currentRoom).emit('serverData', currentUsersInRoom);
     });
 
     socket.on('logout', function (user) {
-      delete currentUsersInRoom[currentRoom][user.id];
-      socket.leave(currentRoom);
+      for(var eachRoom in currentUsersInRoom){
+        delete currentUsersInRoom[eachRoom][user.id];
+        socket.leave(eachRoom);
+      }
       io.in(currentRoom).emit('serverData', currentUsersInRoom);
     })
   });
