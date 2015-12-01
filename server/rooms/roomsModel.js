@@ -9,7 +9,7 @@ var RoomAdminSchema = new mongoose.Schema({
 },{_id: false});
 
 var RoomSchema = new mongoose.Schema({
-  roomName: String,
+  roomName: {type:String,required:true,unique:true},
   roomUsers: [RoomUserSchema],
   roomAdmins: [RoomAdminSchema]
 });

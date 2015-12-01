@@ -4,6 +4,7 @@ var usersController = require('./users/usersController.js');
 module.exports = function (router) { //might refactor to use _id
 	router.get('/api/rooms', roomsController.getRooms);
 	router.post('/api/rooms', roomsController.saveRoom);
+	router.delete('/api/rooms', roomsController.deleteRoom);
 
   router.post('/logout', usersController.logout);
   router.post('/login', usersController.login);

@@ -8,7 +8,7 @@ var expressRouter = express.Router();
 var db = require('./db.js');
 var router = require('./router.js');
 require('./config/middleware.js')(app, express);
-var session = require('express-session')
+var session = require('express-session');
 app.use(session({secret: 'THE_NSA_WILL_NEVER_GET_THIS'})); //we should look into useing a session store service. Redis or Mongo!
 
 router(expressRouter);
