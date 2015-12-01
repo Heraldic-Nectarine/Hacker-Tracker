@@ -33,7 +33,7 @@
 <!--   <h4>Map: {{selectedRoom}}</h4> -->
     <p class='md-title'>Room {{selectedRoom}}</p>
     <ng-map class="map" default-style="true" center="{{gtest}}" zoom="14"><!-- center='current-position'  "{{user.latitude}},{{user.longitude}}"-->
-      <marker ng-repeat="user in usersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
+      <marker ng-repeat="user in allUsersInRoom" position="{{user.latitude}},{{user.longitude}}" class="mark" icon = {{user.userPic}} on-click="goToStreetView(user)">
         
       </marker>
     </ng-map>
