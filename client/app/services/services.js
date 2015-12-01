@@ -26,6 +26,8 @@ angular.module('app.services', [])
     });
   }
 
+
+
   var setRoom = function (room) {
     currentRoom = room;
   }
@@ -74,10 +76,36 @@ angular.module('app.services', [])
       url: '/api/rooms'
     });
   }
+  var nativeRegister = function(firstName,lastName,profilePic,email,password,success,fail){
+    var request = $http({
+          url: '/signup', 
+          method: 'POST', 
+          data: {
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            profilePic: profilePic
+          }
+        });
+    return request.then(success,fail);
+  }
+  var nativeLogin = function(email,password,success,fail){
+    var request = $http({
+          url: '/login', 
+          method: 'POST', 
+          data: {
+            email: email,
+            password: password
+          }
+        });
+    return request.then(success,fail);
   
-  
+  }
   return {
     storage : storage,
+    nativeLogin:nativeLogin,
+    nativeRegister:nativeRegister,
     // storage2 : storage2,
     getFBdata : getFBdata,
     saveMap : saveMap,
