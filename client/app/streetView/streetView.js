@@ -2,7 +2,6 @@ angular.module('app.streetview', ['ngOpenFB'])
 
 .controller('StreetViewController', ['$stateParams','$scope', '$openFB', '$interval', 'ClientHelper', '$rootScope', function ($stateParams,$scope, $openFB, $interval, ClientHelper, $rootScope) {
   // STREET VIEW QUERY DATA
-  //>>>>>>>>>>>>>>>>>>>>>>>
   $scope.streetViewURL = 'http:\/\/maps.googleapis.com/maps/api/streetview';
   $scope.streetViewParams = {
     fov : 120,
@@ -11,7 +10,6 @@ angular.module('app.streetview', ['ngOpenFB'])
     key : 'AIzaSyBJTBZ7r0KWenuxR6P6qEFO7_GY9RojWTk',
     size : '1000x500'//700x500
   }
-  //>>>>>>>>>>>>>>>>>>>>>>>
 
   $scope.user = {};
   $scope.user.id = ClientHelper.currentStreetViewUser;
@@ -32,14 +30,11 @@ angular.module('app.streetview', ['ngOpenFB'])
       }, $scope.streetViewURL + '?');//need to remove this ampersand at the end
     });// need to wrap within $scope.$apply so that streetViewImg change is detected
 
-    //console.log($scope.streetViewImg);
-    
   });
 
 // >>>>>GET MY LOCATION
   var cb = function (pos) {
     angular.extend($scope.user, pos);
-    // console.log('>>>>>',pos);
     socket.emit('userData', $scope.user);
   }
   $interval( function ()  {
