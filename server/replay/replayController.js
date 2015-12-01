@@ -44,7 +44,7 @@ module.exports = {
 		newReplay.save(function(err,replayObj){
 
 			if(err){
-				return res.status(404).send(_error("INSERTREPLAY"));
+				return resp.status(404).send(_error("INSERTREPLAY"));
 			}
 			console.log("Success");
 			resp.send(_success(replayObj));
@@ -55,7 +55,7 @@ module.exports = {
 
 		Replay.find({owner:req.body.owner,title:req.body.title}).remove(function(err,response){
 			if(err){
-				return res.status(404).send(_error("DELETEREPLAY"));
+				return resp.status(404).send(_error("DELETEREPLAY"));
 			}
 			resp.send(_success(response));
 		});
