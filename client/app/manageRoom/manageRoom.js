@@ -3,13 +3,12 @@ angular.module('app.maker', ['ngOpenFB'])
 .controller('ManageRoomController', ['$scope','$openFB','$location', 'ClientHelper', function ($scope, $openFB, $location, ClientHelper) {
   
   $scope.mapName = "";
-  $scope.selectedRoom = '';//TO DO
-  // $scope.rooms = [
-  //   'washroom', 'bedroom', 'My Room'
-  // ];//TO DO 
+  $scope.selectedRoom = '';
+
 
   $scope.createRoom = function () {
     ClientHelper.saveMap($scope.mapName);
+    ClientHelper.setRoom($scope.mapName);
     $location.path('/map');
   }
 
@@ -21,7 +20,7 @@ angular.module('app.maker', ['ngOpenFB'])
     console.log('Entered joinRoom');
     ClientHelper.setRoom($scope.selectedRoom);
     $location.path('/map');
-  }//TODO
+  }
 
   ClientHelper.locationCheck( function(data) {
     ClientHelper.currentPosition = data;

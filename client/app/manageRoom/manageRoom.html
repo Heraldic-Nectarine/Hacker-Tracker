@@ -1,8 +1,5 @@
 <md-content layout='row' ng-init='init()'>
-<!--   <div flex='33' style='background-color: blue'>
-  </div> -->
   <div flex='33' flex-offset='33' layout='column'>
-  <!-- <p class='md-title'>Room Manager</p> -->
     <p class='md-title'>Join a Room</p>
     <form name='joinRoomForm' layout='column' ng-submit='joinRoom()'>
       <md-input-container flex>
@@ -25,7 +22,7 @@
         <input type='text' ng-model="mapName" required>
       </md-input-container>
       <md-contact-chips placeholder="Add friends to room">
-      <!-- need to assign model to this -->
+      <!-- TO DO: need to assign model to this -->
       </md-contact-chips>
 
       <md-button type="submit" class='md-raised md-primary'>
