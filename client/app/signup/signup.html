@@ -15,20 +15,20 @@
 
       <md-input-container flex='50'>
         <label>First Name</label>
-        <input type="text" required>
+        <input type="text" ng-model="user.firstName" required>
       </md-input-container>
       <md-input-container flex='50'>
         <label>Last Name</label>
-        <input type="text" required>
+        <input type="text"  ng-model="user.lastName" required>
       </md-input-container>
       </div>
       <md-input-container>
         <label>Email</label>
-        <input type="text" required>
+        <input type="text" ng-model="user.email" required>
       </md-input-container>
       <md-input-container>
         <label>Create a password</label>
-        <input type='text' required>
+        <input type='text' ng-model="user.password" required>
       </md-input-container>
       <div layout='row'>
       <div flex='10'>
@@ -37,11 +37,11 @@
       </div>
       <md-input-container flex='90'>
         <label>Enter a link for your profile picture</label>
-        <input type='text' required>
+        <input type='text' ng-model="user.profilePic" required>
       </md-input-container>
       </div>
       
-      <md-button class='md-raised md-primary login-fb' ng-click = ''>
+      <md-button class='md-raised md-primary login-fb' ng-click = 'nativeUserSignUp()'>
           Sign up
       </md-button>
     </form>
