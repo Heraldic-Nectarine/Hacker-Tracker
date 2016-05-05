@@ -1,45 +1,96 @@
-.jumbotron {
-  color: black;
-  font-family: 'Lobster', cursive;
-  font-size: 80px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 300;
-  padding: 20px;
-  line-height: 26.3999996185303px;
-  text-align: center;
-}
-
 .picture {
   border-radius: 50%;
   width: 10em;
 }
 
-.navbar .nav li > a:hover {
-  background-color: #346392;
-  border-radius: 5px;
+.profile-pic {
+  border: 0px solid white;
+  background-image: url("http://exmoorpet.com/wp-content/uploads/2012/08/cat.png");
+  background-size: contain;
+  background-origin: content-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  vertical-align: bottom;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin: 0 auto;
 }
 
-.navbar .nav li > a:active {
-  background-color: #27496d;
-  border-radius: 5px;
+.street-view {
+  margin-top: 15px;
 }
 
-.nav li {
-  display: inline;
-  margin: 10px;
-  border-radius: 5px;
-  wide: 80%;
-  background-color: #6496c8;
+
+.logo {
+  display: block;
+  margin: 0 auto;
 }
 
-.nav {
+#content {
+  overflow: hidden;
+}
+
+#content  {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 5px;
+}
+
+.login-fb {
+  display: block;  
+  margin: 0 auto;
+}
+
+.or::before {
+  background-color: rgba(0, 0, 0, 0.117647);
+  height: 1px;
+  content: '';
+  width: 20%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.or::after {
+  background-color: rgba(0, 0, 0, 0.117647);
+  height: 1px;
+  content: '';
+  width: 20%;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.or {
+  text-align: center;
+
+}
+
+.login-question {
+  text-align: center;
+  margin: 0 auto;
+
+}
+
+.login-or-signup {
+  text-align: center;
+  margin: 0 auto;
+
+}
+
+.fb-redirect {
   text-align: center;
 }
 
-.nav li a {
-  font-size: 30px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: white;
+.room-manager {
+  text-align: center;
+}
+
+.map-inset {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index : 1;
+  height: 300px;
+  width: 300px;
 }

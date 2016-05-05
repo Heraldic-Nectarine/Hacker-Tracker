@@ -1,54 +1,105 @@
 angular.module('app.map', ['ngOpenFB'])
 
-.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', function ($scope, $openFB, $interval, ClientHelper) {
-  // methods to be used inside map.html
-  $scope.user = {};
-  $scope.user.id = ClientHelper.storage[0].id;
-  $scope.user.userName = ClientHelper.storage[0].name;
-  $scope.user.userPic = ClientHelper.storage[0].picture;
-  $scope.user.latitude = '';
-  $scope.user.longitude = '';
-
-  $scope.mapName = "";
-
-  $scope.tempDataStore;
-  $scope.intervalFunc;
-
-  socket.on('serverData', function (data) {
-    $scope.tempDataStore = data;
-  })
-
-  $scope.locationCheck = function () {
-    if (navigator.geolocation) {
-      console.log('Geolocation is supported!');
-    } else {
-      console.log('Geolocation is not supported for this Browser/OS version yet.');
-    }
-
-    var startPos;
-    var geoSuccess = function (position) {
-      startPos = position;
-
-      $scope.user.latitude = startPos.coords.latitude;
-      $scope.user.longitude = startPos.coords.longitude;
-
-      socket.emit('userData', $scope.user);
-    };
-    navigator.geolocation.getCurrentPosition(geoSuccess);
+.controller('MapController', ['$scope', '$openFB', '$interval', 'ClientHelper', '$location', function ($scope, $openFB, $interval, ClientHelper, $location) {
+  $scope.user = {
+    id : ClientHelper.storage[0].id,
+    userName : ClientHelper.storage[0].name,
+    userPic : ClientHelper.storage[0].picture,
+    latitude : ClientHelper.currentPosition.latitude,
+    longitude : ClientHelper.currentPosition.longitude
   }
-  $scope.locationCheck();
+  $scope.intervalFunc; // needs to be globally accessible within this controller
+  $scope.gtest = $scope.user.latitude ? $scope.user.latitude + ',' + $scope.user.longitude : 'current-position';
+  $scope.allUsersInRoom = {};
+
+  // need to listen to specific room
+  socket.on('serverData', function (usersInRoom) {
+    $scope.$apply(function () {
+      //console.log("users in room: ", usersInRoom[$scope.selectedRoom]);
+      var usersFromServer = usersInRoom[$scope.selectedRoom];
+
+      //create client-side user object
+      for (var userId in usersFromServer){
+        //console.log("user ", usersFromServer[userId]);
+        $scope.allUsersInRoom[userId] = usersFromServer[userId]; 
+      }
+    });
+    // need to wrap in $scope.$apply so that usersInRoom change is immediately detected.
+  });
+
+  var currLat = 0; 
+  var currLong = 0;
+  var record = false;
+  var recorded = [];
+
+  var cb = function (pos) {
+    $scope.$apply(function () {
+
+      currLat = pos.latitude || currLat;
+      currLong = pos.longitude || currLong;
+
+      $scope.user.latitude = currLat 
+      $scope.user.longitude = currLong;
+
+      //record session 
+      if(record){
+        recorded.push({"lat": currLat, "lng": currLong});
+      }
+      console.log(pos);
+    });
+    socket.emit('userData', $scope.user);
+  }
+  
+  $scope.startRec = function (){
+    record = true;
+  }
+
+  $scope.stopRec = function (){
+    record = false;
+  }
+
+  $scope.saveRec = function (){
+    var recObj = {
+      "owner": $scope.user.id, 
+      "title": $scope.user.userName, 
+      "path": recorded
+    }
+    ClientHelper.saveRec(recObj);
+  }
 
   $scope.logOut = function (fb) {
     $interval.cancel($scope.intervalFunc);
-    socket.emit('logout', $scope.user.id);
+    socket.emit('logout', $scope.user);
     if (fb) {
       $openFB.logout();
     }
   }
 
-  $scope.init = function (){
-    $scope.mapName = ClientHelper.storage2[0];
-    socket.emit('init', ClientHelper.storage2[0]);
-    $scope.intervalFunc = $interval($scope.locationCheck, 3000);
+  $scope.init = function () {
+    $scope.selectedRoom = ClientHelper.getCurrentRoom();
+    $scope.setupConnection();
+    ClientHelper.getRooms()
+      .then(function (rooms){
+        $scope.rooms = rooms.data;
+      });
+  }
+
+  $scope.setupConnection = function () {
+    $scope.allUsersInRoom = {};
+    $interval.cancel($scope.intervalFunc);
+    socket.emit('logout', $scope.user);
+    ClientHelper.setRoom($scope.selectedRoom);
+    socket.emit('connectToRoom', $scope.selectedRoom);
+    ClientHelper.locationCheck(cb);
+    $scope.intervalFunc = $interval( function () {
+      ClientHelper.locationCheck(cb);
+    }, 3000);
+  }
+
+
+  $scope.goToStreetView = function () {
+    var userid = arguments[1]['id'];
+    ClientHelper.currentStreetViewUser = userid;
+    $location.path('streetView');
   }
 }]);

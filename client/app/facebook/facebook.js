@@ -8,7 +8,7 @@ angular.module('app.facebook', ['ngOpenFB'])
     $openFB.logout();
   };
 
-  $openFB.init( {appId: '909462752470016'})
+  $openFB.init( {appId: '1654793101468033'})
 
   $openFB.login({scope: 'email, user_friends'})
 
@@ -38,12 +38,8 @@ angular.module('app.facebook', ['ngOpenFB'])
       angular.extend($scope.me, {picture: res.data.url});
       ClientHelper.getFBdata($scope.me);
     }).then(function() {
-      $location.path('/facebook');
+      $location.path('/manageRoom');
     });
   });
-
-
-
-
 }
 ]);

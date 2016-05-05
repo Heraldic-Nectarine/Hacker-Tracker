@@ -1,39 +1,102 @@
 angular.module('app', [
   'app.facebook',
   'app.home',
+  'app.signup',
   'app.map',
   'app.maker',
+  'app.streetview',
   'app.services',
-  'ngRoute',
-  'ngMap'
+  'app.replay',
+  'ui.router',
+  'ngMap',
+  'ngMaterial'
 ])
-.config(function ($routeProvider, $httpProvider) {
 
-  $routeProvider
-    .when('/', {
-      redirectTo: '/home'
+.config( function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+  $urlRouterProvider.otherwise('/home');
+
+  $stateProvider
+    .state('/', {
+      redirectTo: '/home',
+      data: {
+        requireLogin: false
+      }
     })
-    .when('/home', {
+    .state('home', {
+      url: '/home',
       templateUrl: 'app/home/home.html',
-      controller: 'HomeController'
+      controller: 'HomeController',
+      data: {
+        requireLogin: false
+      }
     })
-    .when('/facebook', {
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'app/signup/signup.html',
+      controller: 'SignupController',
+      data: {
+        requireLogin: false
+      }
+    })
+    .state('facebook', {
+      url: '/facebook',
       templateUrl: 'app/facebook/facebook.html',
-      controller: 'FacebookController'
+      controller: 'FacebookController',
+      data: {
+        requireLogin: false
+      }
     })
-    .when('/map', {
+    .state('map', {
+      url: '/map',
       templateUrl: 'app/map/map.html',
-      controller: 'MapController'
+      controller: 'MapController',
+      data: {
+        requireLogin: true
+      }
     })
-    .when('/mapMaker', {
-      templateUrl: 'app/mapMaker/mapMaker.html',
-      controller: 'MapMakerController'
+    .state('manageRoom', {
+      url: '/manageRoom',
+      templateUrl: 'app/manageRoom/manageRoom.html',
+      controller: 'ManageRoomController',
+      data: {
+        requireLogin: true
+      }
     })
-    .when('/logout', {
+    .state('streetView', {
+      url: '/streetView',
+      templateUrl: 'app/streetView/streetView.html',
+      controller: 'StreetViewController',
+      data: {
+        requireLogin: true
+      }
+    })
+    .state('replayList', {
+      url: '/replays',
+      templateUrl: 'app/replays/replays.html',
+      controller: 'ReplaysController',
+      data: {
+        requireLogin: true
+      }
+    })
+    .state('logout', {
+      url: '/logout',
       redirectTo: '/home'
-    })
-    .otherwise({
-      redirectTo: '/home'
-    });
+    });//this needs to be changed
 
+
+    $mdThemingProvider.theme('default')
+        .primaryPalette('indigo')
+        .accentPalette('red');
+  
+})
+
+.run( function ($rootScope, ClientHelper, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    var requireLogin = toState.data.requireLogin;
+
+    if (requireLogin && typeof ClientHelper.storage[0] === 'undefined') {
+      event.preventDefault();
+      $state.go('home');
+    }
+  });
 });

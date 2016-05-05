@@ -1,5 +1,21 @@
 angular.module('app.home', [])
 
-.controller('HomeController', ['$scope', function ($scope) {
-  // methods to be used inside home.html
+.controller('HomeController', ['$scope', '$location','ClientHelper', function ($scope, $location,services) {
+  
+	function LoginSuccess(a,b){
+  	services.storage.push(a);
+  	$location.path("manageRoom");
+
+	}
+	function LoginFail(a,b){
+		console.log("LOGIN FAIL",a);
+	}
+  $scope.goToFacebook = function () {
+    $location.path('facebook');
+  }
+
+  $scope.nativeUserLogin = function () {
+  	console.log($scope.user);
+  	services.nativeLogin($scope.user,$scope.password,LoginSuccess,LoginFail);
+  }
 }]);

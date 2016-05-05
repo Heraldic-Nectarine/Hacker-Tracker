@@ -1,0 +1,26 @@
+{
+  "name": "manu",
+  "homepage": "https://github.com/mmnm/friendFinder",
+  "authors": [
+    "Manu <manu.mish@gmail.com>"
+  ],
+  "description": "Friend",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.15",
+    "underscore": "~1.8.3",
+    "angular": "~1.4.8",
+    "ngmap": "~1.14.15",
+    "bootstrap": "~3.3.6",
+    "angular-material": "~0.11.4"
+  }
+}
